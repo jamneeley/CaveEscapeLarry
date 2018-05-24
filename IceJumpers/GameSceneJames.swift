@@ -117,7 +117,8 @@ extension GameScene {
             let trailingEdge = UInt32(size.width - (size.width * 0.035 + powerUp.size.width / 2))
             let topEdge = UInt32(size.height - powerUp.size.height / 2)
             let bottomEdge = UInt32(0 + powerUp.size.height / 2)
-            powerUp.position = CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
+            powerUp.position = CGPoint(x: 75, y: 225)
+                //CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
             powerUps.append(powerUp)
         }
         self.powerUps = powerUps
@@ -146,9 +147,11 @@ extension GameScene {
             for powerUp in powerUps {
                 if contact.bodyA.node?.name == powerUp.name {
                     activatePower()
+                    print("body A power up hit")
                     powerUp.removeFromParent()
                 } else if contact.bodyB.node?.name == powerUp.name {
                     activatePower()
+                    print("body B power up hit")
                     powerUp.removeFromParent()
                 }
             }
@@ -158,18 +161,22 @@ extension GameScene {
     
     func activatePower() {
         isPowerActive = true
-        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopPowerUp), userInfo: nil, repeats: false)
-        for icicle in icicles {
-            icicle.physicsBody?.isDynamic = false
+        print("icicles have stopped")
+       if isPowerActive == true {
+            startIcicles()
         }
-    }
-    
-    @objc func stopPowerUp() {
-        isPowerActive = false
-        for icicle in icicles {
-            icicle.physicsBody?.isDynamic = true
-        }
-    }
+           // for icicle in self.icicles {
+          //  icicle.physicsBody?.isDynamic = false
+      //  }
+       //  Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(stopPowerUp), userInfo: nil, repeats: false)
+    //}
+}
+   // @objc func stopPowerUp() {
+        //isPowerActive = false
+       // for icicle in icicles {
+        //    icicle.physicsBody?.isDynamic = true
+      //  }
+  //  }
 }
 
 
