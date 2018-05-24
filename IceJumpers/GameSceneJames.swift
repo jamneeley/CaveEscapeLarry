@@ -95,8 +95,9 @@ extension GameScene {
         if let player = player {
             player.removeFromParent()
         }
-        //random color
-        let playerLocal = Player(color: Colors.PlumpPurple)
+        
+        let randomColor = UIColor(hue: randomNumber(from: 0, to: 80)/360.0, saturation: 100.0/100.0, brightness: 100.0/100.0, alpha: 1.0)
+        let playerLocal = Player(color: randomColor)
         playerLocal.physicsBody!.mass = 0.12
         playerLocal.position.x = (size.width * 0.03) - (playerLocal.size.width / 2)
         playerLocal.position.y = (size.height / 2) + (playerLocal.size.height / 2)
@@ -133,7 +134,7 @@ extension GameScene {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         if collision == PhysicsCatagory.Player | PhysicsCatagory.LoosePad {
             score = 0
-            scoreLabel.text = "\(score)"
+            scoreLabel.text = "Score: \(score)"
             youDiedLabel.text = "YOU DIED"
             let gameScene = GameScene(size: self.size)
             gameScene.scaleMode = self.scaleMode
