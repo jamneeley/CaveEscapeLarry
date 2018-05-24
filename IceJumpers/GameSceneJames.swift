@@ -164,7 +164,7 @@ extension GameScene {
         isPowerActive = true
         print("icicles have stopped")
        if isPowerActive == true {
-            startIcicles()
+            stopIcicles()
         }
            // for icicle in self.icicles {
           //  icicle.physicsBody?.isDynamic = false

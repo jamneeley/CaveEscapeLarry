@@ -36,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player: Player?
     var powerUps: [PowerUp] = []
     var isPowerActive = false
+    var sceneAction = 0
     
     
     
