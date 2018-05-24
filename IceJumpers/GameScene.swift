@@ -134,6 +134,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //            addChild(icicle)
         //        }
 
+        createPowerUp()
         
         setupJames()
         setupHayden()

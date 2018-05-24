@@ -62,7 +62,6 @@ extension GameScene {
     }
     
     @objc func createIcicle2() {
-        
         let icicle2: SKSpriteNode!
         icicle2 = SKSpriteNode(imageNamed: "Icicle")
         icicle2.size = CGSize(width: 100, height: 140)
