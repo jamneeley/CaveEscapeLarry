@@ -97,7 +97,7 @@ extension GameScene {
         }
         //random color
         let playerLocal = Player(color: Colors.PlumpPurple)
-        playerLocal.physicsBody!.mass = 0.02
+        playerLocal.physicsBody!.mass = 0.12
         playerLocal.position.x = (size.width * 0.03) - (playerLocal.size.width / 2)
         playerLocal.position.y = (size.height / 2) + (playerLocal.size.height / 2)
         playerLocal.zPosition = 2
@@ -111,8 +111,8 @@ extension GameScene {
     
     func createPowerUp(Quantity: Int) {
         var powerUps = [PowerUp]()
-        for _ in 0..<Quantity {
-            let powerUp = PowerUp()
+        for i in 0..<Quantity {
+            let powerUp = PowerUp(name: "powerUp\(i)")
             let leadingEdge = UInt32(size.width * 0.35 + powerUp.size.width / 2)
             let trailingEdge = UInt32(size.width - (size.width * 0.035 + powerUp.size.width / 2))
             let topEdge = UInt32(size.height - powerUp.size.height / 2)
@@ -143,7 +143,31 @@ extension GameScene {
             scoreLabel.text = "Score: \(score)"
             resetPlayer()
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.PowerUp {
-            print("GOT POWERUP")
+            for powerUp in powerUps {
+                if contact.bodyA.node?.name == powerUp.name {
+                    activatePower()
+                    powerUp.removeFromParent()
+                } else if contact.bodyB.node?.name == powerUp.name {
+                    activatePower()
+                    powerUp.removeFromParent()
+                }
+            }
+        }
+    }
+    
+    
+    func activatePower() {
+        isPowerActive = true
+        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopPowerUp), userInfo: nil, repeats: false)
+        for icicle in icicles {
+            icicle.physicsBody?.isDynamic = false
+        }
+    }
+    
+    @objc func stopPowerUp() {
+        isPowerActive = false
+        for icicle in icicles {
+            icicle.physicsBody?.isDynamic = true
         }
     }
 }

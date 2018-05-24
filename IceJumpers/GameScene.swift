@@ -35,6 +35,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var score = 0
     var player: Player?
     var powerUps: [PowerUp] = []
+    var isPowerActive = false
     
     
     

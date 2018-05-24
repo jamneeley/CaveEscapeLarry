@@ -26,4 +26,6 @@ class Player: SKSpriteNode{
         physicsBody!.contactTestBitMask = PhysicsCatagory.WinPad | PhysicsCatagory.LoosePad
         physicsBody!.isDynamic = true
     }
+    
+    
 }
