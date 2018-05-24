@@ -14,4 +14,5 @@ struct PhysicsCatagory {
     static let Platform: UInt32                 = 0b100
     static let WinPad: UInt32                   = 0b1000
     static let LoosePad: UInt32                 = 0b10000
+    static let PowerUp: UInt32                  = 0b100000
 }

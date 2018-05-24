@@ -8,9 +8,7 @@
 
 import SpriteKit
 
-
 /////JAMES
-
 
 extension GameScene {
     
@@ -126,7 +124,18 @@ extension GameScene {
             resetPlayer()
         }
     }
+    
+    func createPowerUp() {
+        
+        
+    }
+    
+    func randomNumber(from: UInt32, to: UInt32) -> CGFloat{
+        return CGFloat((arc4random() % to))
+    }
 }
+
+
 
 
 
