@@ -68,7 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         backgroundColor = Colors.Jet
         physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -1)
         
         addChild(leadingEdge)
         leadingEdge.position.x = (leadingEdge.size.width / 2)

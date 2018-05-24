@@ -99,7 +99,7 @@ extension GameScene {
         //random color
         let playerLocal = Player(color: Colors.PlumpPurple)
         playerLocal.physicsBody!.mass = 0.02
-        playerLocal.position.x = (size.width * 0.04) - (playerLocal.size.width / 2)
+        playerLocal.position.x = (size.width * 0.03) - (playerLocal.size.width / 2)
         playerLocal.position.y = (size.height / 2) + (playerLocal.size.height / 2)
         playerLocal.zPosition = 2
         player = playerLocal

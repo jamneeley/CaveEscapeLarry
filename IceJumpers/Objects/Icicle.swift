@@ -11,7 +11,7 @@ import SpriteKit
 class Icicle: SKSpriteNode{
     
     init(name: String, position: CGPoint, linearDamp: CGFloat) {
-        let icicleSize = CGSize(width: 20, height: 25)
+        let icicleSize = CGSize(width: 45, height: 60)
         super.init(texture: SKTexture(image: #imageLiteral(resourceName: "IcicleImage")), color: Colors.TurqoiseBlue, size: icicleSize)
         setup()
         self.name = name
@@ -26,10 +26,11 @@ class Icicle: SKSpriteNode{
     func setup() {
         physicsBody = SKPhysicsBody(texture: texture!, size: size)
         physicsBody!.categoryBitMask = PhysicsCatagory.Platform
-        physicsBody!.collisionBitMask = PhysicsCatagory.Player
+        physicsBody!.collisionBitMask = PhysicsCatagory.Player // need to add an icicle to icicle contact physics body catagory
         physicsBody!.contactTestBitMask = PhysicsCatagory.None
         physicsBody!.isDynamic = true
         physicsBody!.allowsRotation = false
         zPosition = 3
+    
     }
 }
