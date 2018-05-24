@@ -18,6 +18,7 @@ extension GameScene {
     
     func setupHayden() {
 //        initialized
+        
         Timer.scheduledTimer(timeInterval: TimeInterval(2.5), target: self, selector: #selector(GameScene.createIcicle1), userInfo: nil, repeats: true)
         
         Timer.scheduledTimer(timeInterval: TimeInterval(2.75), target: self, selector: #selector(GameScene.createIcicle2), userInfo: nil, repeats: true)
@@ -57,8 +58,8 @@ extension GameScene {
     }
     
     @objc func createIcicle1() {
-
-        
+        let icicle1 = Icicle(name: "icicle1", position: CGPoint(x: size.width * 0.03 + 15, y: 700), linearDamp: 1)
+        addChild(icicle1)
     }
     
     @objc func createIcicle2() {
