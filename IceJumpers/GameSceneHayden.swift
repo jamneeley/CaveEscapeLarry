@@ -18,40 +18,44 @@ extension GameScene {
     
     func setupHayden() {
 //        initialized
+       
+        startIcicles()
         
-        Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameScene.createIcicle1), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(2.25), target: self, selector: #selector(GameScene.createIcicle2), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(GameScene.createIcicle3), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(3.5), target: self, selector: #selector(GameScene.createIcicle4), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(2.1), target: self, selector: #selector(GameScene.createIcicle5), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(2.25), target: self, selector: #selector(GameScene.createIcicle6), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameScene.createIcicle7), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(2.35), target: self, selector: #selector(GameScene.createIcicle8), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(3.25), target: self, selector: #selector(GameScene.createIcicle9), userInfo: nil, repeats: true)
-        
-            Timer.scheduledTimer(timeInterval: TimeInterval(2.30), target: self, selector: #selector(GameScene.createIcicle10), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(4), target: self, selector: #selector(GameScene.createIcicle11), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(2.75), target: self, selector: #selector(GameScene.createIcicle12), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(3.50), target: self, selector: #selector(GameScene.createIcicle13), userInfo: nil, repeats: true)
-        
-        //////Timer.scheduledTimer(timeInterval: TimeInterval(2.30), target: self, selector: #selector(GameScene.createIcicle14), userInfo: nil, repeats: true)
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameScene.removeIciciles), userInfo: nil, repeats: true)
+      Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameScene.removeNodes), userInfo: nil, repeats: true)
     }
 
 
-    
+    func startIcicles() {
+        
+        if isPowerActive == false {
+            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameScene.createIcicle1), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(2.25), target: self, selector: #selector(GameScene.createIcicle2), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(GameScene.createIcicle3), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(3.5), target: self, selector: #selector(GameScene.createIcicle4), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(2.1), target: self, selector: #selector(GameScene.createIcicle5), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(2.25), target: self, selector: #selector(GameScene.createIcicle6), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameScene.createIcicle7), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(2.35), target: self, selector: #selector(GameScene.createIcicle8), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(3.25), target: self, selector: #selector(GameScene.createIcicle9), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(2.30), target: self, selector: #selector(GameScene.createIcicle10), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(4), target: self, selector: #selector(GameScene.createIcicle11), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(2.75), target: self, selector: #selector(GameScene.createIcicle12), userInfo: nil, repeats: true)
+            
+            Timer.scheduledTimer(timeInterval: TimeInterval(3.50), target: self, selector: #selector(GameScene.createIcicle13), userInfo: nil, repeats: true)
+            
+        }
+    }
     
     func updateHayden() {
         
@@ -126,25 +130,9 @@ extension GameScene {
         addChild(icicle13)
     }
     
-    @objc func createIcicle14() {
-        let icicle14: SKSpriteNode!
-        icicle14 = SKSpriteNode(imageNamed: "Icicle")
-        icicle14.size = CGSize(width: 100, height: 140)
-        icicle14.name = "Icicle14"
-        icicle14.physicsBody = SKPhysicsBody(texture: icicle14.texture!, size: icicle14.size)
-        icicle14.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        icicle14.physicsBody?.isDynamic = true
-        icicle14.physicsBody?.affectedByGravity = true
-        icicle14.physicsBody?.allowsRotation = false
-        icicle14.zPosition = 10
-        icicle14.physicsBody?.linearDamping = CGFloat(1.5)
-        icicle14.position.x = 612
-        icicle14.position.y = 750
-        addChild(icicle14)
-    }
     
     
-    @objc func removeIciciles() {
+    @objc func removeNodes() {
         for child in children{
             if child.position.y < -700 {
                 child.removeFromParent()
