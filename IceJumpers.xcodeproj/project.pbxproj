@@ -25,12 +25,12 @@
 		9DB2386420B63AD20091885A /* Icicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2386320B63AD20091885A /* Icicle.swift */; };
 		9DB2386620B63AE10091885A /* WinPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2386520B63AE10091885A /* WinPad.swift */; };
 		9DB2386820B63AEE0091885A /* LosePad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2386720B63AEE0091885A /* LosePad.swift */; };
-		9DB2386A20B63DF00091885A /* Icicle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2386920B63DF00091885A /* Icicle.png */; };
 		9DB2386D20B653C60091885A /* LLPIXEL3.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2386C20B653C40091885A /* LLPIXEL3.ttf */; };
 		9DB2387120B65CE10091885A /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2386F20B65CE10091885A /* Colors.swift */; };
 		9DB2387220B65CE10091885A /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387020B65CE10091885A /* View+Extension.swift */; };
 		9DB2387420B664A30091885A /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387320B664A30091885A /* Wall.swift */; };
 		9DB2387620B710870091885A /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387520B710870091885A /* PowerUp.swift */; };
+		9DB2387820B735600091885A /* Icicle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2387720B735600091885A /* Icicle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,12 +54,12 @@
 		9DB2386320B63AD20091885A /* Icicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icicle.swift; sourceTree = "<group>"; };
 		9DB2386520B63AE10091885A /* WinPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinPad.swift; sourceTree = "<group>"; };
 		9DB2386720B63AEE0091885A /* LosePad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LosePad.swift; sourceTree = "<group>"; };
-		9DB2386920B63DF00091885A /* Icicle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icicle.png; sourceTree = "<group>"; };
 		9DB2386C20B653C40091885A /* LLPIXEL3.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LLPIXEL3.ttf; sourceTree = "<group>"; };
 		9DB2386F20B65CE10091885A /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		9DB2387020B65CE10091885A /* View+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		9DB2387320B664A30091885A /* Wall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wall.swift; sourceTree = "<group>"; };
 		9DB2387520B710870091885A /* PowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
+		9DB2387720B735600091885A /* Icicle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icicle.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +147,7 @@
 		9DB2386B20B63DF60091885A /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				9DB2386920B63DF00091885A /* Icicle.png */,
+				9DB2387720B735600091885A /* Icicle.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -220,10 +220,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DB2383820B638630091885A /* Main.storyboard in Resources */,
-				9DB2386A20B63DF00091885A /* Icicle.png in Resources */,
 				9DB2383A20B638640091885A /* Assets.xcassets in Resources */,
 				7D1D738020B731B3001FF9BF /* Game Sounds in Resources */,
 				9DB2383D20B638640091885A /* LaunchScreen.storyboard in Resources */,
+				9DB2387820B735600091885A /* Icicle.png in Resources */,
 				9DB2386D20B653C60091885A /* LLPIXEL3.ttf in Resources */,
 				9DB2383120B638630091885A /* Actions.sks in Resources */,
 			);
