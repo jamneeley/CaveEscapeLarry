@@ -95,16 +95,36 @@ extension GameScene {
         if let player = player {
             player.removeFromParent()
         }
-        
         //random color
         let playerLocal = Player(color: Colors.PlumpPurple)
         playerLocal.physicsBody!.mass = 0.02
-        playerLocal.position.x = (size.width * 0.04) - (playerLocal.size.width / 2)
+        playerLocal.position.x = (size.width * 0.03) - (playerLocal.size.width / 2)
         playerLocal.position.y = (size.height / 2) + (playerLocal.size.height / 2)
         playerLocal.zPosition = 2
         player = playerLocal
         guard let player = player else {return}
         addChild(player)
+    }
+    
+    
+
+    
+    func createPowerUp(Quantity: Int) {
+        var powerUps = [PowerUp]()
+        for _ in 0..<Quantity {
+            let powerUp = PowerUp()
+            let leadingEdge = UInt32(size.width * 0.35 + powerUp.size.width / 2)
+            let trailingEdge = UInt32(size.width - (size.width * 0.035 + powerUp.size.width / 2))
+            let topEdge = UInt32(size.height - powerUp.size.height / 2)
+            let bottomEdge = UInt32(0 + powerUp.size.height / 2)
+            powerUp.position = CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
+            powerUps.append(powerUp)
+        }
+        self.powerUps = powerUps
+    }
+    
+    func randomNumber(from: UInt32, to: UInt32) -> CGFloat{
+        return CGFloat((arc4random() % (to - from)) + from)
     }
     
     
@@ -122,16 +142,9 @@ extension GameScene {
             score += 1
             scoreLabel.text = "Score: \(score)"
             resetPlayer()
+        } else if collision == PhysicsCatagory.Player | PhysicsCatagory.PowerUp {
+            print("GOT POWERUP")
         }
-    }
-    
-    func createPowerUp() {
-        
-        
-    }
-    
-    func randomNumber(from: UInt32, to: UInt32) -> CGFloat{
-        return CGFloat((arc4random() % to))
     }
 }
 

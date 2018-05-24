@@ -34,6 +34,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerLost = false
     var score = 0
     var player: Player?
+    var powerUps: [PowerUp] = []
+    
     
     
     //MARK: - Init
@@ -68,7 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         backgroundColor = Colors.Jet
         physicsWorld.contactDelegate = self
-        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
+        physicsWorld.gravity = CGVector(dx: 0, dy: -1)
         
         addChild(leadingEdge)
         leadingEdge.position.x = (leadingEdge.size.width / 2)
@@ -128,13 +130,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         youDiedLabel.fontColor = .red
         youDiedLabel.horizontalAlignmentMode = .center
         youDiedLabel.verticalAlignmentMode = .center
-        
-        
-        //        for icicle in icicles {
-        //            addChild(icicle)
-        //        }
 
-        createPowerUp()
+        createPowerUp(Quantity: 2)
+        for powerUp in powerUps {
+            addChild(powerUp)
+        }
         
         setupJames()
         setupHayden()
