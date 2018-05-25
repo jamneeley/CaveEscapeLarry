@@ -52,7 +52,7 @@ extension GameScene {
     }
     
     func findAngle(StartPoint: CGPoint, EndPoint: CGPoint) -> CGFloat{
-//        print("Y2: \(EndPoint.y) Y1: \(StartPoint.y),  X2: \(EndPoint.x) X1 \(StartPoint.x)")
+        //        print("Y2: \(EndPoint.y) Y1: \(StartPoint.y),  X2: \(EndPoint.x) X1 \(StartPoint.x)")
         let radians = atan2(StartPoint.y - EndPoint.y, StartPoint.x - EndPoint.x)
         let degree = radians * 180.0 / CGFloat.pi
         return degree
@@ -60,30 +60,30 @@ extension GameScene {
     
     func playerJumped(Angle angle: CGFloat) {
         //        print(angle)
-//        if playerMoving == false {
-            switch angle {
-            case 160...180:
-                jumpPlayer(dx: -6, dy: 4)
-            case 140...159:
-                jumpPlayer(dx: -4.5, dy: 8)
-            case 120...139:
-                jumpPlayer(dx: -3, dy: 12)
-            case 100...119:
-                jumpPlayer(dx: -1.5, dy: 16)
-            case 80...99:
-                jumpPlayer(dx: 0, dy: 20)
-            case 60...79:
-                jumpPlayer(dx: 1.5, dy: 16)
-            case 40...59:
-                jumpPlayer(dx: 3, dy: 12)
-            case 20...39:
-                jumpPlayer(dx: 4.5, dy: 8)
-            case 0...19:
-                jumpPlayer(dx: 6, dy: 4)
-            default:
-                return
-            }
-//        }
+        //        if playerMoving == false {
+        switch angle {
+        case 160...180:
+            jumpPlayer(dx: -6, dy: 4)
+        case 140...159:
+            jumpPlayer(dx: -4.5, dy: 8)
+        case 120...139:
+            jumpPlayer(dx: -3, dy: 12)
+        case 100...119:
+            jumpPlayer(dx: -1.5, dy: 16)
+        case 80...99:
+            jumpPlayer(dx: 0, dy: 20)
+        case 60...79:
+            jumpPlayer(dx: 1.5, dy: 16)
+        case 40...59:
+            jumpPlayer(dx: 3, dy: 12)
+        case 20...39:
+            jumpPlayer(dx: 4.5, dy: 8)
+        case 0...19:
+            jumpPlayer(dx: 6, dy: 4)
+        default:
+            return
+        }
+        //        }
     }
     
     func jumpPlayer(dx: CGFloat, dy: CGFloat) {
@@ -91,7 +91,8 @@ extension GameScene {
         player.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
     }
     
-    func resetPlayer() {
+    func resetPlayerAndPowerUps() {
+        powerUps.removeAll()
         if let player = player {
             player.removeFromParent()
         }
@@ -105,24 +106,37 @@ extension GameScene {
         player = playerLocal
         guard let player = player else {return}
         addChild(player)
+        createPowerUps(gravity: 1, invincible: 1)
     }
     
-    
-
-    
-    func createPowerUp(Quantity: Int) {
+    func createPowerUps(gravity: Int, invincible: Int) {
         var powerUps = [PowerUp]()
-        for i in 0..<Quantity {
-            let powerUp = PowerUp(name: "powerUp\(i)")
+        //Gravity Powerups
+        for _ in 0..<gravity {
+            let powerUp = PowerUp(name:"gravity", color: Colors.CreameBlue)
             let leadingEdge = UInt32(size.width * 0.35 + powerUp.size.width / 2)
             let trailingEdge = UInt32(size.width - (size.width * 0.035 + powerUp.size.width / 2))
             let topEdge = UInt32(size.height - powerUp.size.height / 2)
             let bottomEdge = UInt32(0 + powerUp.size.height / 2)
-            powerUp.position = CGPoint(x: 75, y: 225)
-                //CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
+            //            powerUp.position = CGPoint(x: 75, y: 225)
+            powerUp.position = CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
+            powerUps.append(powerUp)
+        }
+        //Invincible PowerUps
+        for _ in 0..<invincible {
+            let powerUp = PowerUp(name:"invincible", color: .green)
+            let leadingEdge = UInt32(size.width * 0.35 + powerUp.size.width / 2)
+            let trailingEdge = UInt32(size.width - (size.width * 0.035 + powerUp.size.width / 2))
+            let topEdge = UInt32(size.height - powerUp.size.height / 2)
+            let bottomEdge = UInt32(0 + powerUp.size.height / 2)
+            //            powerUp.position = CGPoint(x: 75, y: 225)
+            powerUp.position = CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
             powerUps.append(powerUp)
         }
         self.powerUps = powerUps
+        for powerUp in self.powerUps {
+            addChild(powerUp)
+        }
     }
     
     func randomNumber(from: UInt32, to: UInt32) -> CGFloat{
@@ -143,41 +157,42 @@ extension GameScene {
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.WinPad {
             score += 1
             scoreLabel.text = "Score: \(score)"
-            resetPlayer()
+            resetPlayerAndPowerUps()
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.PowerUp {
             for powerUp in powerUps {
-                if contact.bodyA.node?.name == powerUp.name {
-                    activatePower()
-                    print("body A power up hit")
-                    powerUp.removeFromParent()
-                } else if contact.bodyB.node?.name == powerUp.name {
-                    activatePower()
-                    print("body B power up hit")
-                    powerUp.removeFromParent()
+                if contact.bodyB.node?.name == powerUp.name {
+                    guard let name = contact.bodyB.node?.name else {return}
+                    if name == "gravity" {
+                        activateGravityPU()
+                        powerUp.removeFromParent()
+                    } else if name == "invincible" {
+                        activateInvinciblePU()
+                        powerUp.removeFromParent()
+                    } else {
+                        print("no name")
+                    }
                 }
             }
         }
     }
     
     
-    func activatePower() {
+    func activateGravityPU() {
         isPowerActive = true
         print("icicles have stopped")
-       if isPowerActive == true {
+        if isPowerActive == true {
             stopIcicles()
         }
-           // for icicle in self.icicles {
-          //  icicle.physicsBody?.isDynamic = false
-      //  }
-       //  Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(stopPowerUp), userInfo: nil, repeats: false)
-    //}
-}
-   // @objc func stopPowerUp() {
-        //isPowerActive = false
-       // for icicle in icicles {
-        //    icicle.physicsBody?.isDynamic = true
-      //  }
-  //  }
+    }
+    
+    func activateInvinciblePU() {
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
+        player?.physicsBody?.collisionBitMask = PhysicsCatagory.Platform
+    }
+    
+    @objc func stopInvincibility() {
+        player?.physicsBody?.collisionBitMask = PhysicsCatagory.Platform | PhysicsCatagory.Icicle
+    }
 }
 
 

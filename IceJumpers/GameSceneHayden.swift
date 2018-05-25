@@ -15,15 +15,14 @@ import SpriteKit
 extension GameScene {
    
     func setupHayden() {
-//        initialized
-       
-    startIcicles()
-        
-      Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameScene.removeNodes), userInfo: nil, repeats: true)
+        //initialized
+        startIcicles()
+        Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameScene.removeNodes), userInfo: nil, repeats: true)
     }
-
-
+    
+    
     @objc func startIcicles() {
+
         
         if isPowerActive == false {
             
@@ -34,6 +33,7 @@ extension GameScene {
             print("icicles are being created")
             
            let T1 = Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameScene.createIcicle1), userInfo: nil, repeats: true)
+
             
            let T2 = Timer.scheduledTimer(timeInterval: TimeInterval(2.50), target: self, selector: #selector(GameScene.createIcicle2), userInfo: nil, repeats: true)
             
@@ -55,6 +55,7 @@ extension GameScene {
             
             let T11 = Timer.scheduledTimer(timeInterval: TimeInterval(4), target: self, selector: #selector(GameScene.createIcicle11), userInfo: nil, repeats: true)
             
+
             let T12 = Timer.scheduledTimer(timeInterval: TimeInterval(2.50), target: self, selector: #selector(GameScene.createIcicle12), userInfo: nil, repeats: true)
             
            let T13 = Timer.scheduledTimer(timeInterval: TimeInterval(3.50), target: self, selector: #selector(GameScene.createIcicle13), userInfo: nil, repeats: true)
@@ -75,6 +76,7 @@ extension GameScene {
         }
         
 }
+
     
     func updateHayden() {
         
@@ -153,29 +155,21 @@ extension GameScene {
         addChild(icicle12)
     }
     
-    @objc func createIcicle13() {
-        let icicle13 = Icicle(name: "icicle13", position: CGPoint(x:  size.width * 0.03 + 650, y: 700), linearDamp: 1.2)
-        icicles.append(icicle13)
-        addChild(icicle13)
-    }
-    
     @objc func stopIcicles() {
+
        
         Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
         
+
         for icicle in icicles {
-    
             icicle.physicsBody?.isDynamic = false
         }
-        
         isPowerActive = false
         for timer in timerArray {
             timer.invalidate()
         }
         timerArray.removeAll()
     }
-    
-
     
     @objc func removeNodes() {
         for child in children{
