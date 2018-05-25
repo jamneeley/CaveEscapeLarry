@@ -10,8 +10,8 @@ import SpriteKit
 
 class PowerUp: SKSpriteNode{
     
-    init(name: String) {
-        super.init(texture: nil, color: Colors.CreameBlue, size: CGSize(width: 10, height: 10))
+    init(name: String, color: UIColor) {
+        super.init(texture: nil, color: color, size: CGSize(width: 10, height: 10))
         setup()
         self.name = name
     }
@@ -27,6 +27,4 @@ class PowerUp: SKSpriteNode{
         physicsBody!.contactTestBitMask = PhysicsCatagory.Player
         physicsBody!.isDynamic = false
     }
-    
-    
 }
