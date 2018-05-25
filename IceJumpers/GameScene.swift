@@ -11,6 +11,8 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+
+    
     //MARK: - Properties
     var leadingEdge: Ground
     var trailingEdge: Ground
@@ -33,8 +35,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerWon = false
     var playerLost = false
     var score = 0
-    var screenSize:CGSize?
-   // let leadingEdgeSize: C
+    
+    //altered at initialization
+    var screenSize = CGSize(width: 0, height: 0)
+    var ledgeWidth = CGFloat(0)
+    var gapWidth = CGFloat(0)
+    var icicleWidth = CGFloat(0)
+    var icicleHeight = CGFloat(0)
+   
     var player: Player?
     
     var powerUps: [PowerUp] = []
@@ -44,12 +52,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var invincible = false
     
     
-    
     //MARK: - Init
     override init(size: CGSize) {
         //creatobjects
         leadingEdge = Ground(size: size)
-        screenSize = size
+    
        // leadingEdge = screenSize
         
         trailingEdge = Ground(size: size)
@@ -66,7 +73,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         youDiedLabel = SKLabelNode(fontNamed: "LLPixel")
         
         super.init(size: size)
+        setupSizes(ScreenSize: size)
         setup()
+    }
+    
+    deinit {
+        print("game scene deallocated")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,6 +86,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     //MARK: - Setup
+    
+    func setupSizes(ScreenSize size: CGSize) {
+        screenSize = size
+        ledgeWidth = size.width * 0.035
+        gapWidth = size.width * 0.0075
+        icicleWidth = size.width * 0.07
+        icicleHeight = size.height * 0.12
+    }
     
     func setup() {
         
@@ -85,7 +105,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         leadingEdge.position.x = (leadingEdge.size.width / 2)
         leadingEdge.position.y = (leadingEdge.size.height / 2)
         leadingEdge.zPosition = 1
-        
         
         addChild(trailingEdge)
         trailingEdge.position.x = (size.width) - (trailingEdge.size.width / 2)
