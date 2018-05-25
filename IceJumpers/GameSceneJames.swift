@@ -144,7 +144,7 @@ extension GameScene {
     
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
-        //if collision is with lose
+        //if collision is with losePad
         if collision == PhysicsCatagory.Player | PhysicsCatagory.LoosePad  {
             loseGame()
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.Icicle {
@@ -152,7 +152,7 @@ extension GameScene {
             if invincible == false {
                 loseGame()
             }
-        //if collision is with win pad
+        //if collision is with winPad
         }else if collision == PhysicsCatagory.Player | PhysicsCatagory.WinPad {
             score += 1
             scoreLabel.text = "Score: \(score)"
@@ -161,12 +161,15 @@ extension GameScene {
             for powerUp in powerUps {
                 if contact.bodyB.node?.name == powerUp.name {
                     guard let name = contact.bodyB.node?.name else {return}
+                    //if gravity
                     if name == "gravity" {
                         activateGravityPU()
                         powerUp.removeFromParent()
+                    //if invincible
                     } else if name == "invincible" {
                         activateInvinciblePU()
                         powerUp.removeFromParent()
+                    //if third powerup
                     } else {
                         print("no name")
                     }
@@ -179,6 +182,7 @@ extension GameScene {
         for timer in timerArray {
             timer.invalidate()
         }
+        
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
@@ -186,8 +190,6 @@ extension GameScene {
         gameScene.scaleMode = self.scaleMode
         let animation = SKTransition.fade(withDuration: 3.0)
         self.view?.presentScene(gameScene, transition: animation)
-        
-
     }
     
     func activateGravityPU() {
