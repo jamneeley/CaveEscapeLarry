@@ -18,6 +18,7 @@ extension GameScene {
         //initialized
         startIcicles()
         Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameScene.removeNodes), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(GameScene.clearTimers), userInfo: nil, repeats: true)
     }
     
     
@@ -83,74 +84,86 @@ extension GameScene {
     }
     
     @objc func createIcicle1() {
-        let icicle1 = Icicle(name: "icicle1", position: CGPoint(x: size.width * 0.03 + 50, y: 750), linearDamp: 1)
+    
+       /// let icicle1 = Icicle(name: "icicle1", position: CGPoint(x: size.width * 0.03 + 50, y: 750), linearDamp: 1)
+        let icicle1 = Icicle(name: "icicle1", position: CGPoint(x: size.width * 0.03 + 50, y: 750), linearDamp: 1, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle1)
         addChild(icicle1)
     }
     
     @objc func createIcicle2() {
-        let icicle2 = Icicle(name: "icicle2", position: CGPoint(x: size.width * 0.03 + 100, y: 750), linearDamp: 0.8)
+        //let icicle2 = Icicle(name: "icicle2", position: CGPoint(x: size.width * 0.03 + 100, y: 750), linearDamp: 0.8)
+        let icicle2 = Icicle(name: "icicle2", position: CGPoint(x: size.width * 0.03 + 100, y: 750), linearDamp: 0.8, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle2)
         addChild(icicle2)
     }
     
     @objc func createIcicle3() {
-        let icicle3 = Icicle(name: "icicle3", position: CGPoint(x: size.width * 0.03 + 150, y: 750), linearDamp: 0.7)
+     //   let icicle3 = Icicle(name: "icicle3", position: CGPoint(x: size.width * 0.03 + 150, y: 750), linearDamp: 0.7)
+        let icicle3 = Icicle(name: "icicle", position: CGPoint(x: size.width * 0.03 + 150,y: 750), linearDamp: 0.7, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle3)
         addChild(icicle3)
     }
     
     @objc func createIcicle4() {
-        let icicle4 = Icicle(name: "icicle4", position: CGPoint(x:  size.width * 0.03 + 200, y: 750), linearDamp: 1.2)
+       // let icicle4 = Icicle(name: "icicle4", position: CGPoint(x:  size.width * 0.03 + 200, y: 750), linearDamp: 1.2)
+        let icicle4 = Icicle(name: "icicle4", position:  CGPoint(x:  size.width * 0.03 + 200, y: 750), linearDamp: 1.2, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle4)
         addChild(icicle4)
     }
     
     @objc func createIcicle5() {
-        let icicle5 = Icicle(name: "icicle5", position: CGPoint(x:  size.width * 0.03 + 250, y: 750), linearDamp: 0.8)
+       // let icicle5 = Icicle(name: "icicle5", position: CGPoint(x:  size.width * 0.03 + 250, y: 750), linearDamp: 0.8)
+        let icicle5 = Icicle(name: "icicle5", position:  CGPoint(x:  size.width * 0.03 + 250, y: 750), linearDamp: 0.8, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle5)
         addChild(icicle5)
     }
     
     @objc func createIcicle6() {
-        let icicle6 = Icicle(name: "icicle6", position: CGPoint(x:  size.width * 0.03 + 300, y: 750), linearDamp: 1)
+        //let icicle6 = Icicle(name: "icicle6", position: CGPoint(x:  size.width * 0.03 + 300, y: 750), linearDamp: 1)
+        let icicle6 = Icicle(name: "icicle6", position:  CGPoint(x:  size.width * 0.03 + 300, y: 750), linearDamp: 1, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle6)
         addChild(icicle6)
     }
     
     @objc func createIcicle7() {
-        let icicle7 = Icicle(name: "icicle7", position: CGPoint(x:  size.width * 0.03 + 350, y: 750), linearDamp: 0.7)
+        //let icicle7 = Icicle(name: "icicle7", position: CGPoint(x:  size.width * 0.03 + 350, y: 750), linearDamp: 0.7)
+        let icicle7 = Icicle(name: "icicle7", position: CGPoint(x:  size.width * 0.03 + 350, y: 750), linearDamp: 0.7, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle7)
         addChild(icicle7)
     }
     
     @objc func createIcicle8() {
-        let icicle8 = Icicle(name: "icicle8", position: CGPoint(x:  size.width * 0.03 + 400, y: 750), linearDamp: 1)
+       // let icicle8 = Icicle(name: "icicle8", position: CGPoint(x:  size.width * 0.03 + 400, y: 750), linearDamp: 1)
+        let icicle8 = Icicle(name: "icicle8", position:  CGPoint(x:  size.width * 0.03 + 400, y: 750), linearDamp: 1, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle8)
         addChild(icicle8)
     }
     
     @objc func createIcicle9() {
-        let icicle9 = Icicle(name: "icicle9", position: CGPoint(x:  size.width * 0.03 + 450, y: 750), linearDamp: 0.9)
+        //let icicle9 = Icicle(name: "icicle9", position: CGSize(width: size.width * 0.07, height: size.height * 0.12), linearDamp: 0.9)
+        let icicle9 = Icicle(name: "icicle9", position: CGPoint(x:  size.width * 0.03 + 450, y: 750) , linearDamp: 0.9, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle9)
         addChild(icicle9)
     }
     
     @objc func createIcicle10() {
-        let icicle10 = Icicle(name: "icicle10", position: CGPoint(x:  size.width * 0.03 + 500, y: 750), linearDamp:
-            1.1)
+      //  let icicle10 = Icicle(name: "icicle10", position: CGPoint(x:  size.width * 0.03 + 500, y: 750), linearDamp: 1.1)
+        let icicle10 = Icicle(name: "icicle10", position: CGPoint(x:  size.width * 0.03 + 500, y: 750), linearDamp: 1.1, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle10)
         addChild(icicle10)
     }
     
     @objc func createIcicle11() {
-        let icicle11 = Icicle(name: "icicle11", position: CGPoint(x:  size.width * 0.03 + 550, y: 700), linearDamp: 0.7)
+        //let icicle11 = Icicle(name: "icicle11", position: CGPoint(x:  size.width * 0.03 + 550, y: 700), linearDamp: 0.7)
+        let icicle11 = Icicle(name: "icicle11", position: CGPoint(x:  size.width * 0.03 + 550, y: 700), linearDamp: 0.7, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle11)
         addChild(icicle11)
     }
     
     @objc func createIcicle12() {
-        let icicle12 = Icicle(name: "icicle12", position: CGPoint(x:  size.width * 0.03 + 600, y: 700), linearDamp: 0.9)
+       // let icicle12 = Icicle(name: "icicle12", position: CGPoint(x:  size.width * 0.03 + 600, y: 700), linearDamp: 0.9)
+        let icicle12 = Icicle(name: "icicle12", position:  CGPoint(x:  size.width * 0.03 + 600, y: 700), linearDamp: 0.9, size: CGSize(width: size.width * 0.07, height: size.height * 0.12))
         icicles.append(icicle12)
         addChild(icicle12)
     }
@@ -178,6 +191,10 @@ extension GameScene {
             }
         }
     }
+    @objc func clearTimers() {
+        timerArray.removeAll()
+            
+        }
 }
 
 
