@@ -33,7 +33,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerWon = false
     var playerLost = false
     var score = 0
+    
     var player: Player?
+    
     var powerUps: [PowerUp] = []
     var isPowerActive = false
     var sceneAction = 0
@@ -109,7 +111,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         winPad.position.y = (size.height / 2) + (winPad.size.height / 2)
         winPad.zPosition = 1
         
-        resetPlayerAndPowerUps()
+        resetPlayer()
+        createPowerUps(gravity: 1, invincible: 1)
         
         addChild(scoreLabel)
         scoreLabel.text = "Score: \(score)"
@@ -122,6 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.alpha = 99
         scoreLabel.horizontalAlignmentMode = .left
         scoreLabel.verticalAlignmentMode = .top
+        scoreLabel.zPosition = 4
         
         addChild(youDiedLabel)
         youDiedLabel.color = .red
@@ -132,6 +136,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         youDiedLabel.fontColor = .red
         youDiedLabel.horizontalAlignmentMode = .center
         youDiedLabel.verticalAlignmentMode = .center
+        youDiedLabel.zPosition = 4
         setupJames()
         setupHayden()
         setupFrancisco()

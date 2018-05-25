@@ -22,10 +22,8 @@ class Player: SKSpriteNode{
     func setup() {
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody!.categoryBitMask = PhysicsCatagory.Player
-        physicsBody!.collisionBitMask = PhysicsCatagory.Platform
-        physicsBody!.contactTestBitMask = PhysicsCatagory.WinPad | PhysicsCatagory.LoosePad
+        physicsBody!.collisionBitMask = PhysicsCatagory.Platform | PhysicsCatagory.Icicle
+        physicsBody!.contactTestBitMask = PhysicsCatagory.WinPad | PhysicsCatagory.LoosePad | PhysicsCatagory.PowerUp | PhysicsCatagory.Icicle
         physicsBody!.isDynamic = true
     }
-    
-    
 }
