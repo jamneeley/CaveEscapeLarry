@@ -33,7 +33,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var playerWon = false
     var playerLost = false
     var score = 0
-    
+    var screenSize:CGSize?
+   // let leadingEdgeSize: C
     var player: Player?
     
     var powerUps: [PowerUp] = []
@@ -42,10 +43,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timerArray: [AnyObject] = []
     
     
+    
     //MARK: - Init
     override init(size: CGSize) {
         //creatobjects
         leadingEdge = Ground(size: size)
+        screenSize = size
+       // leadingEdge = screenSize
         
         trailingEdge = Ground(size: size)
         winPad = WinPad(size: size)
