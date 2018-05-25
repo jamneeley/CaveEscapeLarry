@@ -11,6 +11,9 @@
 		7D23003B20B742FD00744A12 /* Menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D23003A20B742FD00744A12 /* Menu.mp3 */; };
 		7D23003D20B7430600744A12 /* InGameSounds.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D23003C20B7430600744A12 /* InGameSounds.mp3 */; };
 		7D23003F20B74C1500744A12 /* DeathSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7D23003E20B74C1500744A12 /* DeathSound.mp3 */; };
+		7DF54FD520B868EF000A3ED4 /* powerUpOne.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7DF54FD420B868EF000A3ED4 /* powerUpOne.wav */; };
+		7DF54FD720B868F6000A3ED4 /* powerUpTwo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7DF54FD620B868F6000A3ED4 /* powerUpTwo.wav */; };
+		7DF54FD920B868FD000A3ED4 /* powerUpThree.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7DF54FD820B868FD000A3ED4 /* powerUpThree.wav */; };
 		9DB2382D20B638630091885A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2382C20B638630091885A /* AppDelegate.swift */; };
 		9DB2383120B638630091885A /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2383020B638630091885A /* Actions.sks */; };
 		9DB2383520B638630091885A /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2383420B638630091885A /* GameViewController.swift */; };
@@ -33,7 +36,6 @@
 		9DB2387220B65CE10091885A /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387020B65CE10091885A /* View+Extension.swift */; };
 		9DB2387420B664A30091885A /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387320B664A30091885A /* Wall.swift */; };
 		9DB2387620B710870091885A /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387520B710870091885A /* PowerUp.swift */; };
-		9DB2387820B735600091885A /* Icicle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2387720B735600091885A /* Icicle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,9 @@
 		7D23003A20B742FD00744A12 /* Menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Menu.mp3; sourceTree = "<group>"; };
 		7D23003C20B7430600744A12 /* InGameSounds.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = InGameSounds.mp3; sourceTree = "<group>"; };
 		7D23003E20B74C1500744A12 /* DeathSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DeathSound.mp3; sourceTree = "<group>"; };
+		7DF54FD420B868EF000A3ED4 /* powerUpOne.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerUpOne.wav; sourceTree = "<group>"; };
+		7DF54FD620B868F6000A3ED4 /* powerUpTwo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerUpTwo.wav; sourceTree = "<group>"; };
+		7DF54FD820B868FD000A3ED4 /* powerUpThree.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerUpThree.wav; sourceTree = "<group>"; };
 		9DB2382920B638630091885A /* IceJumpers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceJumpers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB2382C20B638630091885A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DB2383020B638630091885A /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -114,6 +119,9 @@
 				7D23003A20B742FD00744A12 /* Menu.mp3 */,
 				7D23003C20B7430600744A12 /* InGameSounds.mp3 */,
 				7D23003E20B74C1500744A12 /* DeathSound.mp3 */,
+				7DF54FD420B868EF000A3ED4 /* powerUpOne.wav */,
+				7DF54FD620B868F6000A3ED4 /* powerUpTwo.wav */,
+				7DF54FD820B868FD000A3ED4 /* powerUpThree.wav */,
 				9DB2383020B638630091885A /* Actions.sks */,
 				9DB2383420B638630091885A /* GameViewController.swift */,
 				9DB2383620B638630091885A /* Main.storyboard */,
@@ -228,13 +236,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DF54FD720B868F6000A3ED4 /* powerUpTwo.wav in Resources */,
 				9DB2383820B638630091885A /* Main.storyboard in Resources */,
-				9DB2386A20B63DF00091885A /* Icicle.png in Resources */,
 				7D23003F20B74C1500744A12 /* DeathSound.mp3 in Resources */,
 				9DB2383A20B638640091885A /* Assets.xcassets in Resources */,
 				7D23003D20B7430600744A12 /* InGameSounds.mp3 in Resources */,
 				9DB2383D20B638640091885A /* LaunchScreen.storyboard in Resources */,
 				7D23003B20B742FD00744A12 /* Menu.mp3 in Resources */,
+				7DF54FD520B868EF000A3ED4 /* powerUpOne.wav in Resources */,
+				7DF54FD920B868FD000A3ED4 /* powerUpThree.wav in Resources */,
 				9DB2386D20B653C60091885A /* LLPIXEL3.ttf in Resources */,
 				9DB2383120B638630091885A /* Actions.sks in Resources */,
 			);
