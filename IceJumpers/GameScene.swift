@@ -40,6 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isPowerActive = false
     var sceneAction = 0
     var timerArray: [AnyObject] = []
+    var invincible = false
     
     
     //MARK: - Init

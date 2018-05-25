@@ -147,8 +147,11 @@ extension GameScene {
         //if collision is with lose
         if collision == PhysicsCatagory.Player | PhysicsCatagory.LoosePad  {
             loseGame()
-        } else if collision == PhysicsCatagory.Player {
-            loseGame()
+        } else if collision == PhysicsCatagory.Player | PhysicsCatagory.Icicle {
+            print("Hit icicle")
+            if invincible == false {
+                loseGame()
+            }
         //if collision is with win pad
         }else if collision == PhysicsCatagory.Player | PhysicsCatagory.WinPad {
             score += 1
@@ -173,6 +176,9 @@ extension GameScene {
     }
     
     func loseGame() {
+        for timer in timerArray {
+            timer.invalidate()
+        }
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
@@ -180,6 +186,8 @@ extension GameScene {
         gameScene.scaleMode = self.scaleMode
         let animation = SKTransition.fade(withDuration: 3.0)
         self.view?.presentScene(gameScene, transition: animation)
+        
+
     }
     
     func activateGravityPU() {
@@ -192,13 +200,12 @@ extension GameScene {
     
     func activateInvinciblePU() {
         Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
-        guard let player = player else {return}
-            player.physicsBody!.contactTestBitMask = PhysicsCatagory.LoosePad | PhysicsCatagory.WinPad | PhysicsCatagory.PowerUp
+        invincible = true
             print("PHYSICS CATAGORY CHANGED")
     }
     
     @objc func stopInvincibility() {
-        player?.physicsBody?.contactTestBitMask = PhysicsCatagory.LoosePad | PhysicsCatagory.WinPad | PhysicsCatagory.PowerUp | PhysicsCatagory.Icicle
+        invincible = false
     }
 }
 
