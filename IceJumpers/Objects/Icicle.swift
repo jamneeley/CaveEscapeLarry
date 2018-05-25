@@ -25,8 +25,8 @@ class Icicle: SKSpriteNode{
     
     func setup() {
         physicsBody = SKPhysicsBody(texture: texture!, size: size)
-        physicsBody!.categoryBitMask = PhysicsCatagory.Platform
-        physicsBody!.collisionBitMask = PhysicsCatagory.Player // need to add an icicle to icicle contact physics body catagory
+        physicsBody!.categoryBitMask = PhysicsCatagory.Icicle
+        physicsBody!.collisionBitMask = PhysicsCatagory.Player
         physicsBody!.contactTestBitMask = PhysicsCatagory.None
         physicsBody!.isDynamic = true
         physicsBody!.allowsRotation = false

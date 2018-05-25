@@ -58,7 +58,7 @@ extension GameScene {
 
             let T12 = Timer.scheduledTimer(timeInterval: TimeInterval(2.50), target: self, selector: #selector(GameScene.createIcicle12), userInfo: nil, repeats: true)
             
-           let T13 = Timer.scheduledTimer(timeInterval: TimeInterval(3.50), target: self, selector: #selector(GameScene.createIcicle13), userInfo: nil, repeats: true)
+
             
             timerArray.append(T1)
             timerArray.append(T2)
@@ -72,7 +72,7 @@ extension GameScene {
             timerArray.append(T10)
             timerArray.append(T11)
             timerArray.append(T12)
-            timerArray.append(T13)
+            
         }
         
 }

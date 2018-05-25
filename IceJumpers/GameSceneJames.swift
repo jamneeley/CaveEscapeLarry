@@ -91,12 +91,11 @@ extension GameScene {
         player.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
     }
     
-    func resetPlayerAndPowerUps() {
+    func resetPlayer() {
         powerUps.removeAll()
         if let player = player {
             player.removeFromParent()
         }
-        
         let randomColor = UIColor(hue: randomNumber(from: 0, to: 80)/360.0, saturation: 100.0/100.0, brightness: 100.0/100.0, alpha: 1.0)
         let playerLocal = Player(color: randomColor)
         playerLocal.physicsBody!.mass = 0.12
@@ -106,7 +105,6 @@ extension GameScene {
         player = playerLocal
         guard let player = player else {return}
         addChild(player)
-        createPowerUps(gravity: 1, invincible: 1)
     }
     
     func createPowerUps(gravity: Int, invincible: Int) {
@@ -146,18 +144,16 @@ extension GameScene {
     
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
-        if collision == PhysicsCatagory.Player | PhysicsCatagory.LoosePad {
-            score = 0
-            scoreLabel.text = "Score: \(score)"
-            youDiedLabel.text = "YOU DIED"
-            let gameScene = GameScene(size: self.size)
-            gameScene.scaleMode = self.scaleMode
-            let animation = SKTransition.fade(withDuration: 3.0)
-            self.view?.presentScene(gameScene, transition: animation)
-        } else if collision == PhysicsCatagory.Player | PhysicsCatagory.WinPad {
+        //if collision is with lose
+        if collision == PhysicsCatagory.Player | PhysicsCatagory.LoosePad  {
+            loseGame()
+        } else if collision == PhysicsCatagory.Player {
+            loseGame()
+        //if collision is with win pad
+        }else if collision == PhysicsCatagory.Player | PhysicsCatagory.WinPad {
             score += 1
             scoreLabel.text = "Score: \(score)"
-            resetPlayerAndPowerUps()
+            resetPlayer()
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.PowerUp {
             for powerUp in powerUps {
                 if contact.bodyB.node?.name == powerUp.name {
@@ -176,6 +172,15 @@ extension GameScene {
         }
     }
     
+    func loseGame() {
+        score = 0
+        scoreLabel.text = "Score: \(score)"
+        youDiedLabel.text = "YOU DIED"
+        let gameScene = GameScene(size: self.size)
+        gameScene.scaleMode = self.scaleMode
+        let animation = SKTransition.fade(withDuration: 3.0)
+        self.view?.presentScene(gameScene, transition: animation)
+    }
     
     func activateGravityPU() {
         isPowerActive = true
@@ -186,12 +191,14 @@ extension GameScene {
     }
     
     func activateInvinciblePU() {
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
-        player?.physicsBody?.collisionBitMask = PhysicsCatagory.Platform
+        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
+        guard let player = player else {return}
+            player.physicsBody!.contactTestBitMask = PhysicsCatagory.LoosePad | PhysicsCatagory.WinPad | PhysicsCatagory.PowerUp
+            print("PHYSICS CATAGORY CHANGED")
     }
     
     @objc func stopInvincibility() {
-        player?.physicsBody?.collisionBitMask = PhysicsCatagory.Platform | PhysicsCatagory.Icicle
+        player?.physicsBody?.contactTestBitMask = PhysicsCatagory.LoosePad | PhysicsCatagory.WinPad | PhysicsCatagory.PowerUp | PhysicsCatagory.Icicle
     }
 }
 
