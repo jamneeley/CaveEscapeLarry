@@ -44,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override init(size: CGSize) {
         //creatobjects
         leadingEdge = Ground(size: size)
-
+        
         trailingEdge = Ground(size: size)
         winPad = WinPad(size: size)
         losePad = LosePad(size: size)
@@ -98,7 +98,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(ceiling)
         ceiling.position.x = (size.width / 2)
         ceiling.position.y = size.height + (ceiling.size.height / 2)
-
+        
         addChild(losePad)
         losePad.position.x = (size.width / 2)
         losePad.position.y = -(losePad.size.height / 2)
@@ -109,8 +109,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         winPad.position.y = (size.height / 2) + (winPad.size.height / 2)
         winPad.zPosition = 1
         
-        resetPlayer()
-    
+        resetPlayerAndPowerUps()
+        
         addChild(scoreLabel)
         scoreLabel.text = "Score: \(score)"
         scoreLabel.fontSize = 24
@@ -132,20 +132,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         youDiedLabel.fontColor = .red
         youDiedLabel.horizontalAlignmentMode = .center
         youDiedLabel.verticalAlignmentMode = .center
-
-        createPowerUp(Quantity: 2)
-        for powerUp in powerUps {
-            addChild(powerUp)
-        }
-        
         setupJames()
         setupHayden()
         setupFrancisco()
     }
-
+    
     //MASTER VIEW DID LOAD
     override func didMove(to view: SKView) {
-
+        
     }
     
     //MASTER UPDATE PER FRAME
