@@ -37,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var powerUps: [PowerUp] = []
     var isPowerActive = false
     var sceneAction = 0
-    
+    var timerArray: [AnyObject] = []
     
     
     //MARK: - Init
