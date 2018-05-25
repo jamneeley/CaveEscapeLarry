@@ -145,7 +145,6 @@ extension GameScene {
     
     
     func didBegin(_ contact: SKPhysicsContact) {
-//        print("\(contact.bodyB.node?.name)")
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         if collision == PhysicsCatagory.Player | PhysicsCatagory.LoosePad {
             score = 0
@@ -161,38 +160,39 @@ extension GameScene {
             resetPlayerAndPowerUps()
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.PowerUp {
             for powerUp in powerUps {
-                if contact.bodyB.node?.name == "gravity" {
-                    activatePower()
-                    print("body A power up hit")
-                    powerUp.removeFromParent()
-                } else if contact.bodyB.node?.name == "invincible" {
-                    activatePower()
-                    print("body B power up hit")
-                    powerUp.removeFromParent()
+                if contact.bodyB.node?.name == powerUp.name {
+                    guard let name = contact.bodyB.node?.name else {return}
+                    if name == "gravity" {
+                        activateGravityPU()
+                        powerUp.removeFromParent()
+                    } else if name == "invincible" {
+                        activateInvinciblePU()
+                        powerUp.removeFromParent()
+                    } else {
+                        print("no name")
+                    }
                 }
             }
         }
     }
     
     
-    func activatePower() {
+    func activateGravityPU() {
         isPowerActive = true
         print("icicles have stopped")
         if isPowerActive == true {
             stopIcicles()
         }
-        // for icicle in self.icicles {
-        //  icicle.physicsBody?.isDynamic = false
-        //  }
-        //  Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(stopPowerUp), userInfo: nil, repeats: false)
-        //}
     }
-    // @objc func stopPowerUp() {
-    //isPowerActive = false
-    // for icicle in icicles {
-    //    icicle.physicsBody?.isDynamic = true
-    //  }
-    //  }
+    
+    func activateInvinciblePU() {
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
+        player?.physicsBody?.collisionBitMask = PhysicsCatagory.Platform
+    }
+    
+    @objc func stopInvincibility() {
+        player?.physicsBody?.collisionBitMask = PhysicsCatagory.Platform | PhysicsCatagory.Icicle
+    }
 }
 
 
