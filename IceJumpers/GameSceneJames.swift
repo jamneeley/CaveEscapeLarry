@@ -36,11 +36,11 @@ extension GameScene {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches  {
-            let location = touch.location(in: self)
-            touchStartLocation = location
-        }
+   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+     for touch in touches  {
+          let location = touch.location(in: self)
+          touchStartLocation = location
+       }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -182,14 +182,16 @@ extension GameScene {
         for timer in timerArray {
             timer.invalidate()
         }
-        
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
-        let gameScene = GameScene(size: self.size)
-        gameScene.scaleMode = self.scaleMode
-        let animation = SKTransition.fade(withDuration: 3.0)
-        self.view?.presentScene(gameScene, transition: animation)
+       
+        for icicle in icicles{
+            guard let index = icicles.index(of: icicle) else {return}
+            icicles.remove(at: index)
+        }
+     
+        isGameOver = true
     }
     
     func activateGravityPU() {

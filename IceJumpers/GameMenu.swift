@@ -15,13 +15,16 @@ class GameMenu: SKScene{
     
     var titleLabel: SKLabelNode
     var startGameLabel: SKLabelNode
-    
+    var musicLabel: SKLabelNode
+    var isMusicOn = true
     //MARK: - Init
     
     override init(size: CGSize) {
         titleLabel = SKLabelNode(fontNamed: "LLPixel")
         startGameLabel = SKLabelNode(fontNamed: "LLPixel")
+        musicLabel = SKLabelNode(fontNamed: "LLPixel")
         super.init(size: size)
+        preferenceForMusic()
         setup()
     }
     
@@ -55,17 +58,30 @@ class GameMenu: SKScene{
         startGameLabel.verticalAlignmentMode = .top
         startGameLabel.position.x = size.width / 2
         startGameLabel.position.y = size.height / 2 - size.height * 0.1
+        
+        addChild(musicLabel)
+        musicLabel.fontSize = 25
+        musicLabel.horizontalAlignmentMode = .center
+        musicLabel.verticalAlignmentMode = .top
+        musicLabel.position.x = size.width / 2
+        musicLabel.position.y = size.height / 2 - size.height * 0.30
+        if isMusicOn == true{
+            musicLabel.text = "music: On"
+            musicLabel.fontColor = Colors.CreameBlue
+            GameSounds.shared.playMenuSound()
+        }else {
+            musicLabel.text = "music: Off"
+            musicLabel.fontColor = UIColor.red
+
+        }
+        
+
     }
     
 
     
     override func didMove(to view: SKView) {
-        //remove when done testing
-        //testing
-//        let gameScene = GameScene(size: self.size)
-//        gameScene.scaleMode = self.scaleMode
-//        let animation = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
-//        self.view?.presentScene(gameScene, transition: animation)
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -74,11 +90,39 @@ class GameMenu: SKScene{
             let location = touch.location(in: self)
             if startGameLabel.contains(location) {
                 startGameLabel.fontColor = Colors.TurqoiseBlue
+                
                 let gameScene = GameScene(size: self.size)
                 gameScene.scaleMode = self.scaleMode
                 let animation = SKTransition.doorsCloseHorizontal(withDuration: 1.5)
                 self.view?.presentScene(gameScene, transition: animation)
             }
+            if musicLabel.contains(location){
+                if isMusicOn == true {
+                    UserDefaults.standard.set(false, forKey: "isMusicOn")
+                    isMusicOn = false
+                    musicLabel.text = "music: Off"
+                    musicLabel.fontColor = UIColor.red
+                    GameSounds.shared.stopPlayingSound()
+                } else {
+                    UserDefaults.standard.set(true, forKey: "isMusicOn")
+                    isMusicOn = true
+                    musicLabel.text = "music: On"
+                    musicLabel.fontColor = Colors.CreameBlue
+                    GameSounds.shared.playMenuSound()
+                }
+                
+            }
+        }
+    }
+ 
+    func preferenceForMusic() {
+        if UserDefaults.standard.object(forKey: "isMusicOn") as? Bool == true {
+            isMusicOn = true
+            print("preference for music is on")
+        } else {
+            isMusicOn = false
+            
+            print("preference for music is off")
         }
     }
 }
