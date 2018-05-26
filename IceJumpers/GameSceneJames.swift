@@ -179,19 +179,9 @@ extension GameScene {
     }
     
     func loseGame() {
-        for timer in timerArray {
-            timer.invalidate()
-        }
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
-        GameSounds.shared.playDeathSound()
-       
-        for icicle in icicles{
-            guard let index = icicles.index(of: icicle) else {return}
-            icicles.remove(at: index)
-        }
-     
         isGameOver = true
     }
     

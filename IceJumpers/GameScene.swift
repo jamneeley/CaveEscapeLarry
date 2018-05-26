@@ -176,10 +176,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
        
         if isGameOver == true {
             print("Game Over!")
+            
+            // This is all for the cleanup of the scene so it can deinit
+            
             for child in children {
                 child.removeFromParent()
             }
            
+            for timer in timerArray {
+                timer.invalidate()
+            }
+            
+            for icicle in icicles{
+                guard let index = icicles.index(of: icicle) else {return}
+                icicles.remove(at: index)
+            }
             self.removeAllActions()
             self.removeAllChildren()
             self.removeFromParent()
