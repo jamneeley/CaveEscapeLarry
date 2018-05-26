@@ -176,7 +176,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
        
         if isGameOver == true {
             print("Game Over!")
-            
+            for child in children {
+                child.removeFromParent()
+            }
            
             self.removeAllActions()
             self.removeAllChildren()
