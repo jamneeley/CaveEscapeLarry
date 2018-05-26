@@ -10,7 +10,6 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
 
     
     //MARK: - Properties
@@ -50,6 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var sceneAction = 0
     var timerArray: [AnyObject] = []
     var invincible = false
+    var isGameOver = false
     
     
     //MARK: - Init
@@ -173,8 +173,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MASTER UPDATE PER FRAME
     override func update(_ currentTime: TimeInterval) {
+       
+        if isGameOver == true {
+            print("Game Over!")
+            
+           
+            self.removeAllActions()
+            self.removeAllChildren()
+            self.removeFromParent()
+            let newGameScene = GameScene(size: (view?.frame.size)!)
+            newGameScene.scaleMode = self.scaleMode
+            let animation = SKTransition.fade(withDuration: 3.0)
+            self.view?.presentScene(newGameScene, transition: animation)
+        }
         updateJames()
         updateHayden()
         updateFrancisco()
     }
+    
 }

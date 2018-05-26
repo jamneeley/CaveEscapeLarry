@@ -15,8 +15,10 @@ extension GameScene {
     func setupHayden() {
         //initialized
         startIcicles()
-        Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(removeNodes), userInfo: nil, repeats: true)
-        Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(clearTimers), userInfo: nil, repeats: true)
+
+      var removeNodesTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(removeNodes), userInfo: nil, repeats: true)
+        timerArray.append(removeNodesTimer)
+    
     }
     
     @objc func startIcicles() {
@@ -29,31 +31,31 @@ extension GameScene {
             
             print("icicles are being created")
             
-            let T1 = Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(createIcicle1), userInfo: nil, repeats: true)
+            var T1 = Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(createIcicle1), userInfo: nil, repeats: true)
             
-            let T2 = Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(createIcicle2), userInfo: nil, repeats: true)
+            var T2 = Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(createIcicle2), userInfo: nil, repeats: true)
             
-            let T3 = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(createIcicle3), userInfo: nil, repeats: true)
+            var T3 = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(createIcicle3), userInfo: nil, repeats: true)
             
-            let T4 = Timer.scheduledTimer(timeInterval: TimeInterval(1.8), target: self, selector: #selector(createIcicle4), userInfo: nil, repeats: true)
+            var T4 = Timer.scheduledTimer(timeInterval: TimeInterval(1.8), target: self, selector: #selector(createIcicle4), userInfo: nil, repeats: true)
             
-            let T5 = Timer.scheduledTimer(timeInterval: TimeInterval(3.5), target: self, selector: #selector(createIcicle5), userInfo: nil, repeats: true)
+            var T5 = Timer.scheduledTimer(timeInterval: TimeInterval(3.5), target: self, selector: #selector(createIcicle5), userInfo: nil, repeats: true)
             
-            let T6 = Timer.scheduledTimer(timeInterval: TimeInterval(2.8), target: self, selector: #selector(createIcicle6), userInfo: nil, repeats: true)
+            var T6 = Timer.scheduledTimer(timeInterval: TimeInterval(2.8), target: self, selector: #selector(createIcicle6), userInfo: nil, repeats: true)
             
-            let T7 = Timer.scheduledTimer(timeInterval: TimeInterval(1.9), target: self, selector: #selector(createIcicle7), userInfo: nil, repeats: true)
+            var T7 = Timer.scheduledTimer(timeInterval: TimeInterval(1.9), target: self, selector: #selector(createIcicle7), userInfo: nil, repeats: true)
             
-            let T8 = Timer.scheduledTimer(timeInterval: TimeInterval(2.5), target: self, selector: #selector(createIcicle8), userInfo: nil, repeats: true)
+           var T8 = Timer.scheduledTimer(timeInterval: TimeInterval(2.5), target: self, selector: #selector(createIcicle8), userInfo: nil, repeats: true)
             
-            let T9 = Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(createIcicle9), userInfo: nil, repeats: true)
+            var T9 = Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(createIcicle9), userInfo: nil, repeats: true)
             
-            let T10 = Timer.scheduledTimer(timeInterval: TimeInterval(1.9), target: self, selector: #selector(createIcicle10), userInfo: nil, repeats: true)
+            var T10 = Timer.scheduledTimer(timeInterval: TimeInterval(1.9), target: self, selector: #selector(createIcicle10), userInfo: nil, repeats: true)
             
-            let T11 = Timer.scheduledTimer(timeInterval: TimeInterval(2.25), target: self, selector: #selector(createIcicle11), userInfo: nil, repeats: true)
+            var T11 = Timer.scheduledTimer(timeInterval: TimeInterval(2.25), target: self, selector: #selector(createIcicle11), userInfo: nil, repeats: true)
             
-            let T12 = Timer.scheduledTimer(timeInterval: TimeInterval(3.2), target: self, selector: #selector(createIcicle12), userInfo: nil, repeats: true)
+            var T12 = Timer.scheduledTimer(timeInterval: TimeInterval(3.2), target: self, selector: #selector(createIcicle12), userInfo: nil, repeats: true)
             
-            let t13 = Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(createIcicle13), userInfo: nil, repeats: true)
+           var t13 = Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(createIcicle13), userInfo: nil, repeats: true)
             
             timerArray.append(T1)
             timerArray.append(T2)
@@ -73,7 +75,7 @@ extension GameScene {
     
     
     func updateHayden() {
-        
+    
     }
     
     @objc func createIcicle1() {
@@ -155,13 +157,16 @@ extension GameScene {
     }
     
     @objc func stopIcicles() {
-        Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
+        
+         Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
+        
     
         for icicle in icicles {
             icicle.physicsBody?.isDynamic = false
         }
         isPowerActive = false
         for timer in timerArray {
+            
             timer.invalidate()
         }
         timerArray.removeAll()
@@ -171,16 +176,18 @@ extension GameScene {
         for child in children{
             if child.position.y < -700 {
                 child.removeFromParent()
+                child.removeAllActions()
             }
         }
-    }
-    @objc func clearTimers() {
-        timerArray.removeAll()
-        
-    }
+        for icicle in icicles {
+            if icicle.position.y < -700 {
+                guard let index = icicles.index(of: icicle) else {return}
+                icicles.remove(at: index)
+            }
+        }
 }
 
-
+}
 
 
 
