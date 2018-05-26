@@ -185,6 +185,7 @@ extension GameScene {
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
+        GameSounds.shared.playDeathSound()
        
         for icicle in icicles{
             guard let index = icicles.index(of: icicle) else {return}
