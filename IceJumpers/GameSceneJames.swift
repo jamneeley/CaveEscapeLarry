@@ -13,7 +13,7 @@ import SpriteKit
 extension GameScene {
     
     func setupJames() {
-        //initialized
+
     }
     
     func updateJames() {
@@ -83,7 +83,6 @@ extension GameScene {
         default:
             return
         }
-        //        }
     }
     
     func jumpPlayer(dx: CGFloat, dy: CGFloat) {
@@ -128,12 +127,45 @@ extension GameScene {
             let topEdge = UInt32(size.height - powerUp.size.height / 2)
             let bottomEdge = UInt32(0 + powerUp.size.height / 2)
             //            powerUp.position = CGPoint(x: 75, y: 225)
+            
             powerUp.position = CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
             powerUps.append(powerUp)
         }
         self.powerUps = powerUps
         for powerUp in self.powerUps {
             addChild(powerUp)
+        }
+        let strobeTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(strobeGravity), userInfo: nil, repeats: true)
+        importantTimers.append(strobeTimer)
+        
+        let colorTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(strobeInvincibility), userInfo: nil, repeats: true)
+        importantTimers.append(colorTimer)
+    }
+    
+    @objc func strobeGravity(){
+        if isBlack == false {
+            for powerUp in powerUps {
+                if powerUp.name == "gravity" {
+                    powerUp.color = .lightGray
+                    isBlack = true
+                }
+            }
+        } else {
+            for powerUp in powerUps {
+                if powerUp.name == "gravity" {
+                    powerUp.color = Colors.CreameBlue
+                    isBlack = false
+                }
+            }
+        }
+    }
+    
+    @objc func strobeInvincibility() {
+        let randomColor = UIColor(hue: randomNumber(from: 0, to: 360)/360.0, saturation: 100.0/100.0, brightness: 100.0/100.0, alpha: 1.0)
+        for powerUp in powerUps {
+            if powerUp.name == "invincible" {
+                powerUp.color = randomColor
+            }
         }
     }
     

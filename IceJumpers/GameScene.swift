@@ -47,9 +47,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var powerUps: [PowerUp] = []
     var isPowerActive = false
     var sceneAction = 0
+    var importantTimers: [AnyObject] = []
     var timerArray: [AnyObject] = []
     var invincible = false
     var isGameOver = false
+    var isBlack = false
     
     
     //MARK: - Init
@@ -184,6 +186,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
            
             for timer in timerArray {
+                timer.invalidate()
+            }
+            for timer in importantTimers {
                 timer.invalidate()
             }
             
