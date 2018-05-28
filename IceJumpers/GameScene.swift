@@ -54,6 +54,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isBlack = false
     var canJump = false
     
+    var isMusicOn = true
+    var hitIcicle = false 
+    
     
     //MARK: - Init
     override init(size: CGSize) {
@@ -174,8 +177,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let player = player else {return}
         let nodes: [SKSpriteNode] = [leadingEdge, trailingEdge, player, winPad]
         cameraShake(layers: nodes, duration: 3)
+        
+        if UserDefaults.standard.object(forKey: "isMusicOn") as? Bool == true {
+            isMusicOn = true
+            print("preference for music is on")
+        } else {
+            isMusicOn = false
+            
+            print("preference for music is off")
     }
-    
+}
     func cameraShake(layers: [SKSpriteNode], duration: CGFloat) {
         let amplitudeX:Float = 10
         let amplitudeY:Float = 6
@@ -210,9 +221,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
        
         if isGameOver == true {
             print("Game Over!")
-            
             // This is all for the cleanup of the scene so it can deinit
-            
             for child in children {
                 child.removeFromParent()
             }

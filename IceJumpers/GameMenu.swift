@@ -10,7 +10,6 @@ import Foundation
 import SpriteKit
 
 class GameMenu: SKScene{
-    
     //MARK: - Properties
     
     var titleLabel: SKLabelNode

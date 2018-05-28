@@ -181,6 +181,7 @@ extension GameScene {
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.Icicle {
             print("Hit icicle")
             if invincible == false {
+                hitIcicle = true
                 loseGame()
             }
         //if collision is with winPad
@@ -215,6 +216,11 @@ extension GameScene {
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
+        if isMusicOn == true && hitIcicle == true {
+            GameSounds.shared.playDeathSound()
+            hitIcicle = false
+            
+    }
         let looseTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeGameStatus), userInfo: nil, repeats: false)
         importantTimers.append(looseTimer)
     }
@@ -226,6 +232,10 @@ extension GameScene {
     func activateGravityPU() {
         isPowerActive = true
         print("icicles have stopped")
+        if isMusicOn == true && isPowerActive == true {
+            GameSounds.shared.playPowerUpSoundThree()
+        }
+        
         if isPowerActive == true {
             stopIcicles()
         }
@@ -234,6 +244,9 @@ extension GameScene {
     func activateInvinciblePU() {
         Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
         invincible = true
+        if isMusicOn == true && invincible == true {
+            GameSounds.shared.playPowerUpSoundOne()
+        }
             print("PHYSICS CATAGORY CHANGED")
     }
     
