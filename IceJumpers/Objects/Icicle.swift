@@ -30,6 +30,5 @@ class Icicle: SKSpriteNode{
         physicsBody!.isDynamic = true
         physicsBody!.allowsRotation = false
         zPosition = 3
-    
     }
 }

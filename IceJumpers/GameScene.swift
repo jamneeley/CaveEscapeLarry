@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var leadingWall: Wall
     var trailingWall: Wall
     var ceiling: Wall
+    var background: SKSpriteNode
     
     var icicles = [Icicle]()
     
@@ -62,6 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override init(size: CGSize) {
         //creatobjects
         leadingEdge = Ground(size: size)
+        background = SKSpriteNode(imageNamed: "CaveBackground")
     
        // leadingEdge = screenSize
         
@@ -102,6 +104,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setup() {
+        
+        addChild(background)
+        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        background.size.width = size.width
+        background.size.height = size.height
+        background.zPosition =  0
         
         backgroundColor = Colors.Jet
         physicsWorld.contactDelegate = self
@@ -207,7 +215,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for layer in layers {
             layer.run(actionSeq)
         }
-        let canJumpTimer = Timer.scheduledTimer(timeInterval: TimeInterval(duration + 2), target: self, selector: #selector(setCanJump), userInfo: nil, repeats: false)
+        let canJumpTimer = Timer.scheduledTimer(timeInterval: TimeInterval(duration + 1.6), target: self, selector: #selector(setCanJump), userInfo: nil, repeats: false)
         timerArray.append(canJumpTimer)
     }
     
@@ -250,3 +258,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updateFrancisco()
     }
 }
+
+
+//BUGS:
+
+/*
+ 
+ 1. Game scene does not dealocate when getting gravity powerup.
+ 
+ */
+ 
