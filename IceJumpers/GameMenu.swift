@@ -40,10 +40,11 @@ class GameMenu: SKScene{
     //MARK: - Methods
     
     func setup() {
+        setHighScore()
         backgroundColor = Colors.Jet
     
         addChild(highScoreLabel)
-        let highScore = UserDefaults.standard.object(forKey: "highScore") as? String ?? "0"
+        let highScore = UserDefaults.standard.object(forKey: "highScore") as? Int ?? 0
         highScoreLabel.text = "HighScore: \(highScore)"
         highScoreLabel.position.x = 10
         highScoreLabel.position.y = size.height - 10
@@ -86,6 +87,16 @@ class GameMenu: SKScene{
         }
     }
     
+    func setHighScore() {
+        if isKeyPresentInUserDefaults(key:"highScore") == false {
+            UserDefaults.standard.set(0, forKey: "highScore")
+            print("HighScore Saved")
+        }
+    }
+    
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
 
     
     override func didMove(to view: SKView) {
