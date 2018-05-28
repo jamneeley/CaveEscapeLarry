@@ -26,5 +26,6 @@ class PowerUp: SKSpriteNode{
         physicsBody!.collisionBitMask = PhysicsCatagory.None
         physicsBody!.contactTestBitMask = PhysicsCatagory.Player
         physicsBody!.isDynamic = false
+        zPosition = 2
     }
 }

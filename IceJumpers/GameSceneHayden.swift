@@ -149,7 +149,8 @@ extension GameScene {
     
     @objc func stopIcicles() {
         
-         Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
+         let wtfTimer = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
+        importantTimers.append(wtfTimer)
         
     
         for icicle in icicles {
