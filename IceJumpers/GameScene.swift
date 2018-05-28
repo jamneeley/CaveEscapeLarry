@@ -52,6 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var invincible = false
     var isGameOver = false
     var isBlack = false
+    var canJump = false
     
     
     //MARK: - Init
@@ -170,8 +171,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MASTER VIEW DID LOAD
     override func didMove(to view: SKView) {
-        
+        guard let player = player else {return}
+        let nodes: [SKSpriteNode] = [leadingEdge, trailingEdge, player, winPad]
+        cameraShake(layers: nodes, duration: 3)
     }
+    
+    func cameraShake(layers: [SKSpriteNode], duration: CGFloat) {
+        let amplitudeX:Float = 10
+        let amplitudeY:Float = 6
+        let numberOfShakes = duration / 0.04
+        var actionsArray:[SKAction] = []
+        
+        for _ in 1...Int(numberOfShakes) {
+            let moveX = Float(arc4random_uniform(UInt32(amplitudeX))) - amplitudeX / 2
+            let moveY = Float(arc4random_uniform(UInt32(amplitudeY))) - amplitudeY / 2
+            
+            let shakeAction = SKAction.moveBy(x: CGFloat(moveX), y: CGFloat(moveY), duration: 0.02)
+            shakeAction.timingMode = SKActionTimingMode.easeOut
+            actionsArray.append(shakeAction)
+            actionsArray.append(shakeAction.reversed())
+        }
+        
+        let actionSeq = SKAction.sequence(actionsArray)
+        for layer in layers {
+            layer.run(actionSeq)
+        }
+        let canJumpTimer = Timer.scheduledTimer(timeInterval: TimeInterval(duration + 2), target: self, selector: #selector(setCanJump), userInfo: nil, repeats: false)
+        timerArray.append(canJumpTimer)
+    }
+    
+    @objc func setCanJump(){
+        canJump = true
+    }
+
     
     //MASTER UPDATE PER FRAME
     override func update(_ currentTime: TimeInterval) {
@@ -201,12 +233,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.removeFromParent()
             let newGameScene = GameScene(size: (view?.frame.size)!)
             newGameScene.scaleMode = self.scaleMode
-            let animation = SKTransition.fade(withDuration: 3.0)
+            let animation = SKTransition.fade(withDuration: 1.0)
             self.view?.presentScene(newGameScene, transition: animation)
         }
         updateJames()
         updateHayden()
         updateFrancisco()
     }
-    
 }

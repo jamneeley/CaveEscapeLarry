@@ -87,7 +87,9 @@ extension GameScene {
     
     func jumpPlayer(dx: CGFloat, dy: CGFloat) {
         guard let player = player else {return}
-        player.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
+        if canJump {
+            player.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
+        }
     }
     
     func resetPlayer() {
@@ -211,9 +213,16 @@ extension GameScene {
     }
     
     func loseGame() {
+        canJump = false
+        player?.color = .red
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
+        let looseTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeGameStatus), userInfo: nil, repeats: false)
+        importantTimers.append(looseTimer)
+    }
+    
+    @objc func changeGameStatus() {
         isGameOver = true
     }
     
