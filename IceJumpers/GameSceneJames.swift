@@ -223,6 +223,7 @@ extension GameScene {
     }
         let looseTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeGameStatus), userInfo: nil, repeats: false)
         importantTimers.append(looseTimer)
+        UserDefaults.standard.set(false, forKey: "isNewUser")
     }
     
     @objc func changeGameStatus() {

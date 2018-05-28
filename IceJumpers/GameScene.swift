@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-
+    
     
     //MARK: - Properties
     var leadingEdge: Ground
@@ -21,6 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var trailingWall: Wall
     var ceiling: Wall
     var background: SKSpriteNode
+    var instructionGesture: SKSpriteNode
     
     var icicles = [Icicle]()
     
@@ -42,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gapWidth = CGFloat(0)
     var icicleWidth = CGFloat(0)
     var icicleHeight = CGFloat(0)
-   
+    
     var player: Player?
     
     var powerUps: [PowerUp] = []
@@ -54,6 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isGameOver = false
     var isBlack = false
     var canJump = false
+    var instructionCount = 0
     
     var isMusicOn = true
     var hitIcicle = false 
@@ -64,8 +66,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //creatobjects
         leadingEdge = Ground(size: size)
         background = SKSpriteNode(imageNamed: "CaveBackground")
-    
-       // leadingEdge = screenSize
+        instructionGesture = SKSpriteNode(imageNamed: "tapGesture")
+        
+        
+        // leadingEdge = screenSize
         
         trailingEdge = Ground(size: size)
         winPad = WinPad(size: size)
@@ -104,7 +108,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setup() {
-        
         addChild(background)
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.size.width = size.width
@@ -186,6 +189,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nodes: [SKSpriteNode] = [leadingEdge, trailingEdge, player, winPad]
         cameraShake(layers: nodes, duration: 3)
         
+        if UserDefaults.standard.object(forKey: "isNewUser") as? Bool != false {
+            let animationStartTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startAnimationTimer), userInfo: nil, repeats: true)
+            timerArray.append(animationStartTimer)
+        }
+        
+        
+        //music
         if UserDefaults.standard.object(forKey: "isMusicOn") as? Bool == true {
             isMusicOn = true
             print("preference for music is on")
@@ -193,8 +203,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             isMusicOn = false
             
             print("preference for music is off")
+        }
     }
-}
+    @objc func startAnimationTimer() {
+        if instructionCount < 3 {
+            let startAnimation = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(animateInstructionGesture), userInfo: nil, repeats: false)
+            timerArray.append(startAnimation)
+        }
+        instructionCount += 1
+    }
+    
+    @objc func animateInstructionGesture() {
+        instructionGesture.position.x = size.width / 2 + size.width * 0.05
+        instructionGesture.position.y = size.height / 2
+        instructionGesture.size.width = size.width * 0.15
+        instructionGesture.size.height = size.width * 0.15
+        let endPositionX = size.width / 2
+        let endPositionY = size.height / 2 - size.height * 0.15
+        addChild(instructionGesture)
+        instructionGesture.zPosition = 5
+        let slideDown = SKAction.move(to: CGPoint(x: endPositionX, y: endPositionY), duration: 0.4)
+        instructionGesture.run(slideDown) {
+            self.instructionGesture.removeFromParent()
+        }
+    }
+    
+    
+    
     func cameraShake(layers: [SKSpriteNode], duration: CGFloat) {
         let amplitudeX:Float = 10
         let amplitudeY:Float = 6
@@ -222,18 +257,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     @objc func setCanJump(){
         canJump = true
     }
-
+    
     
     //MASTER UPDATE PER FRAME
     override func update(_ currentTime: TimeInterval) {
-       
+        
         if isGameOver == true {
             print("Game Over!")
             // This is all for the cleanup of the scene so it can deinit
             for child in children {
                 child.removeFromParent()
             }
-           
+            
             for timer in timerArray {
                 timer.invalidate()
             }
@@ -259,12 +294,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 }
 
-
-//BUGS:
-
-/*
- 
- 1. Game scene does not dealocate when getting gravity powerup.
- 
- */
  
