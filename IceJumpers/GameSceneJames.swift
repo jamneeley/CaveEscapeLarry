@@ -113,23 +113,20 @@ extension GameScene {
         //Gravity Powerups
         for _ in 0..<gravity {
             let powerUp = PowerUp(name:"gravity", color: Colors.CreameBlue)
-            let leadingEdge = UInt32(size.width * 0.35 + powerUp.size.width / 2)
-            let trailingEdge = UInt32(size.width - (size.width * 0.035 + powerUp.size.width / 2))
-            let topEdge = UInt32(size.height - powerUp.size.height / 2)
-            let bottomEdge = UInt32(0 + powerUp.size.height / 2)
-            //            powerUp.position = CGPoint(x: 75, y: 225)
+            let leadingEdge = UInt32(size.width * 0.25)
+            let trailingEdge = UInt32(size.width * 0.75)
+            let topEdge = UInt32(size.height * 0.75)
+            let bottomEdge = UInt32(size.height * 0.25)
             powerUp.position = CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
             powerUps.append(powerUp)
         }
         //Invincible PowerUps
         for _ in 0..<invincible {
             let powerUp = PowerUp(name:"invincible", color: .green)
-            let leadingEdge = UInt32(size.width * 0.35 + powerUp.size.width / 2)
-            let trailingEdge = UInt32(size.width - (size.width * 0.035 + powerUp.size.width / 2))
-            let topEdge = UInt32(size.height - powerUp.size.height / 2)
-            let bottomEdge = UInt32(0 + powerUp.size.height / 2)
-            //            powerUp.position = CGPoint(x: 75, y: 225)
-            
+            let leadingEdge = UInt32(size.width * 0.25)
+            let trailingEdge = UInt32(size.width * 0.75)
+            let topEdge = UInt32(size.height * 0.75)
+            let bottomEdge = UInt32(size.height * 0.25)
             powerUp.position = CGPoint(x: randomNumber(from: leadingEdge, to: trailingEdge), y: randomNumber(from: bottomEdge, to: topEdge))
             powerUps.append(powerUp)
         }
