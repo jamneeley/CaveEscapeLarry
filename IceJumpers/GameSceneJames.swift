@@ -226,6 +226,13 @@ extension GameScene {
     func loseGame() {
         canJump = false
         player?.color = .red
+        if let highScore = UserDefaults.standard.object(forKey: "highScore") as? Int {
+            if score > highScore {
+                UserDefaults.standard.set(score, forKey: "highScore")
+                print("highScore saved")
+            }
+        }
+        
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
