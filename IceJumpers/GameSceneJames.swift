@@ -219,7 +219,7 @@ extension GameScene {
         if isMusicOn == true && hitIcicle == true {
             GameSounds.shared.playDeathSound()
             hitIcicle = false
-            
+            isMusicOn = false
     }
         let looseTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeGameStatus), userInfo: nil, repeats: false)
         importantTimers.append(looseTimer)
