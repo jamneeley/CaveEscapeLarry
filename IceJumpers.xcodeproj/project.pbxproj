@@ -37,6 +37,7 @@
 		9DB2387420B664A30091885A /* Wall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387320B664A30091885A /* Wall.swift */; };
 		9DB2387620B710870091885A /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387520B710870091885A /* PowerUp.swift */; };
 		9DB2388F20BC90280091885A /* CaveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2388E20BC90280091885A /* CaveBackground.png */; };
+		9DB2389120BC9F830091885A /* tapGesture.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389020BC9F830091885A /* tapGesture.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		9DB2387520B710870091885A /* PowerUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUp.swift; sourceTree = "<group>"; };
 		9DB2387720B735600091885A /* Icicle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icicle.png; sourceTree = "<group>"; };
 		9DB2388E20BC90280091885A /* CaveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CaveBackground.png; sourceTree = "<group>"; };
+		9DB2389020BC9F830091885A /* tapGesture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tapGesture.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		9DB2386B20B63DF60091885A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DB2389020BC9F830091885A /* tapGesture.png */,
 				9DB2388E20BC90280091885A /* CaveBackground.png */,
 				9DB2387720B735600091885A /* Icicle.png */,
 			);
@@ -247,6 +250,7 @@
 				7D23003D20B7430600744A12 /* InGameSounds.mp3 in Resources */,
 				9DB2383D20B638640091885A /* LaunchScreen.storyboard in Resources */,
 				7D23003B20B742FD00744A12 /* Menu.mp3 in Resources */,
+				9DB2389120BC9F830091885A /* tapGesture.png in Resources */,
 				7DF54FD520B868EF000A3ED4 /* powerUpOne.wav in Resources */,
 				7DF54FD920B868FD000A3ED4 /* powerUpThree.wav in Resources */,
 				9DB2386D20B653C60091885A /* LLPIXEL3.ttf in Resources */,

@@ -92,8 +92,9 @@ class GameMenu: SKScene{
                 
                 let gameScene = GameScene(size: self.size)
                 gameScene.scaleMode = self.scaleMode
-                let animation = SKTransition.doorsCloseHorizontal(withDuration: 1.5)
+                let animation = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
                 self.view?.presentScene(gameScene, transition: animation)
+                
             }
             if musicLabel.contains(location){
                 if isMusicOn == true {
