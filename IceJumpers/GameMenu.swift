@@ -14,6 +14,7 @@ class GameMenu: SKScene{
     
     var titleLabel: SKLabelNode
     var startGameLabel: SKLabelNode
+    var highScoreLabel: SKLabelNode
     var musicLabel: SKLabelNode
     var isMusicOn = true
     //MARK: - Init
@@ -22,6 +23,7 @@ class GameMenu: SKScene{
         titleLabel = SKLabelNode(fontNamed: "LLPixel")
         startGameLabel = SKLabelNode(fontNamed: "LLPixel")
         musicLabel = SKLabelNode(fontNamed: "LLPixel")
+        highScoreLabel = SKLabelNode(fontNamed: "LLPixel")
         super.init(size: size)
         preferenceForMusic()
         setup()
@@ -39,6 +41,16 @@ class GameMenu: SKScene{
     
     func setup() {
         backgroundColor = Colors.Jet
+    
+        addChild(highScoreLabel)
+        let highScore = UserDefaults.standard.object(forKey: "highScore") as? String ?? "0"
+        highScoreLabel.text = "HighScore: \(highScore)"
+        highScoreLabel.position.x = 10
+        highScoreLabel.position.y = size.height - 10
+        highScoreLabel.verticalAlignmentMode = .top
+        highScoreLabel.horizontalAlignmentMode = .left
+        highScoreLabel.fontColor = Colors.TurqoiseBlue
+        highScoreLabel.fontSize = 24
         
         addChild(titleLabel)
         titleLabel.fontSize = 80
@@ -71,10 +83,7 @@ class GameMenu: SKScene{
         }else {
             musicLabel.text = "music: Off"
             musicLabel.fontColor = UIColor.red
-
         }
-        
-
     }
     
 
