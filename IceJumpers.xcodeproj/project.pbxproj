@@ -423,7 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9A24X3MLF7;
+				DEVELOPMENT_TEAM = 4X5NURS3PH;
 				INFOPLIST_FILE = "$(SRCROOT)/IceJumpers/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -441,7 +441,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9A24X3MLF7;
+				DEVELOPMENT_TEAM = 4X5NURS3PH;
 				INFOPLIST_FILE = "$(SRCROOT)/IceJumpers/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
