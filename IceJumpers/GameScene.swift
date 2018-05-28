@@ -28,6 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastUpdateTime: CFTimeInterval = 0
     let scoreLabel: SKLabelNode
     let youDiedLabel: SKLabelNode
+    let menuLabel: SKLabelNode
     
     var touchStartLocation: CGPoint = CGPoint(x: 0, y: 0)
     var playerX: CGFloat = 0
@@ -83,6 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         scoreLabel = SKLabelNode(fontNamed: "LLPixel")
         youDiedLabel = SKLabelNode(fontNamed: "LLPixel")
+        menuLabel = SKLabelNode(fontNamed: "LLPixel")
         
         super.init(size: size)
         setupSizes(ScreenSize: size)
@@ -178,6 +180,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         youDiedLabel.horizontalAlignmentMode = .center
         youDiedLabel.verticalAlignmentMode = .center
         youDiedLabel.zPosition = 4
+        
+        addChild(menuLabel)
+        menuLabel.text = "Menu"
+        menuLabel.fontSize = 24
+        menuLabel.fontColor = Colors.ShockingPink
+        menuLabel.position.x = winPad.position.x - 60
+        menuLabel.position.y = (size.height - 10)
+        menuLabel.alpha = 99
+        menuLabel.horizontalAlignmentMode = .left
+        menuLabel.verticalAlignmentMode = .top
+        menuLabel.zPosition = 4
+        
         setupJames()
         setupHayden()
         setupFrancisco()
@@ -265,21 +279,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if isGameOver == true {
             print("Game Over!")
             // This is all for the cleanup of the scene so it can deinit
-            for child in children {
-                child.removeFromParent()
-            }
-            
-            for timer in timerArray {
-                timer.invalidate()
-            }
-            for timer in importantTimers {
-                timer.invalidate()
-            }
-            
-            for icicle in icicles{
-                guard let index = icicles.index(of: icicle) else {return}
-                icicles.remove(at: index)
-            }
+            gameSceneCleanUp()
             self.removeAllActions()
             self.removeAllChildren()
             self.removeFromParent()
@@ -291,6 +291,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updateJames()
         updateHayden()
         updateFrancisco()
+    }
+    
+    func gameSceneCleanUp() {
+        for child in children {
+            child.removeFromParent()
+        }
+        
+        for timer in timerArray {
+            timer.invalidate()
+        }
+        for timer in importantTimers {
+            timer.invalidate()
+        }
+        
+        for icicle in icicles{
+            guard let index = icicles.index(of: icicle) else {return}
+            icicles.remove(at: index)
+        }
+        self.removeAllActions()
+        self.removeAllChildren()
+        self.removeFromParent()
     }
 }
 

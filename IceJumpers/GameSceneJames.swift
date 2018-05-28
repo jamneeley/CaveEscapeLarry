@@ -39,10 +39,22 @@ extension GameScene {
    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
      for touch in touches  {
           let location = touch.location(in: self)
+        if menuLabel.contains(location) {
+            
+            let gameScene = GameMenu(size: self.size)
+            gameScene.scaleMode = self.scaleMode
+            let animation = SKTransition.doorway(withDuration: 2)
+            self.view?.presentScene(gameScene, transition: animation)
+            
+           gameSceneCleanUp()
+            
+            
+            
+        } else {
           touchStartLocation = location
        }
     }
-    
+    }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let location = touch.location(in: self)
@@ -178,6 +190,7 @@ extension GameScene {
         //if collision is with losePad
         if collision == PhysicsCatagory.Player | PhysicsCatagory.LoosePad  {
             loseGame()
+            
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.Icicle {
             print("Hit icicle")
             if invincible == false {
@@ -216,6 +229,11 @@ extension GameScene {
         score = 0
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
+        if isMusicOn == true {
+        GameSounds.shared.playDeathSound()
+            isMusicOn = false
+        }
+        
         if isMusicOn == true && hitIcicle == true {
             GameSounds.shared.playDeathSound()
             hitIcicle = false
