@@ -54,8 +54,8 @@ class GameMenu: SKScene{
         highScoreLabel.fontSize = 24
         
         addChild(titleLabel)
-        titleLabel.fontSize = 80
-        titleLabel.text = "Ice Jumpers"
+        titleLabel.fontSize = 75
+        titleLabel.text = "Cave Escape Larry"
         titleLabel.fontColor = Colors.ShockingPink
         titleLabel.horizontalAlignmentMode = .center
         titleLabel.verticalAlignmentMode = .top

@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ceiling: Wall
     var background: SKSpriteNode
     var instructionGesture: SKSpriteNode
+    var escapeMessage: SKLabelNode
     
     var icicles = [Icicle]()
     
@@ -57,6 +58,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isBlack = false
     var canJump = false
     var instructionCount = 0
+    var numberOfmessages = 0
     
     var isMusicOn = true
     var hitIcicle = false 
@@ -85,6 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel = SKLabelNode(fontNamed: "LLPixel")
         youDiedLabel = SKLabelNode(fontNamed: "LLPixel")
         menuLabel = SKLabelNode(fontNamed: "LLPixel")
+        escapeMessage = SKLabelNode(fontNamed:"LLPixel")
         
         super.init(size: size)
         setupSizes(ScreenSize: size)
@@ -194,6 +197,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         menuLabel.verticalAlignmentMode = .top
         menuLabel.zPosition = 4
         
+        addChild(escapeMessage)
+        escapeMessage.text = "LARRY! STOP LOUNGING AROUND AND LEAVE THAT CAVE!!!"
+        escapeMessage.fontSize = 20
+        escapeMessage.fontColor = UIColor.red
+        escapeMessage.position.x = size.width / 2
+        escapeMessage.position.y = size.height * 0.05
+        escapeMessage.isHidden = true
+        
         setupJames()
         setupHayden()
         setupFrancisco()
@@ -208,9 +219,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if UserDefaults.standard.object(forKey: "isNewUser") as? Bool != false {
             let animationStartTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startAnimationTimer), userInfo: nil, repeats: true)
             timerArray.append(animationStartTimer)
+            
         }
-        
-        
         //music
         if UserDefaults.standard.object(forKey: "isMusicOn") as? Bool == true {
             isMusicOn = true
@@ -220,6 +230,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             print("preference for music is off")
         }
+        
+        let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(escapeTimer), userInfo: nil, repeats: true)
+        importantTimers.append(timerForMessage)
     }
     @objc func startAnimationTimer() {
         if instructionCount < 3 {
@@ -314,6 +327,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeAllActions()
         self.removeAllChildren()
         self.removeFromParent()
+    }
+    
+    @objc func escapeTimer() {
+        if numberOfmessages < 1 {
+            let escapeMessageTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(showEscapeMessage), userInfo: nil, repeats: false)
+            timerArray.append(escapeMessageTimer)
+        } else {
+            escapeMessage.isHidden = true
+        }
+}
+    @objc func showEscapeMessage () {
+       if escapeMessage.isHidden == true {
+            escapeMessage.isHidden = false
+            numberOfmessages += 1
+        } else {
+            escapeMessage.isHidden = true
+        
+        }
+
     }
 }
 
