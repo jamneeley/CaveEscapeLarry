@@ -17,9 +17,11 @@ class GameMenu: SKScene{
     var highScoreLabel: SKLabelNode
     var musicLabel: SKLabelNode
     var isMusicOn = true
+    var larry: SKSpriteNode
     //MARK: - Init
     
     override init(size: CGSize) {
+        larry = SKSpriteNode(color: Colors.TurqoiseBlue, size: CGSize(width: 15, height: 15))
         titleLabel = SKLabelNode(fontNamed: "LLPixel")
         startGameLabel = SKLabelNode(fontNamed: "LLPixel")
         musicLabel = SKLabelNode(fontNamed: "LLPixel")
@@ -40,6 +42,7 @@ class GameMenu: SKScene{
     //MARK: - Methods
     
     func setup() {
+
         setHighScore()
         backgroundColor = Colors.Jet
     
@@ -52,15 +55,18 @@ class GameMenu: SKScene{
         highScoreLabel.horizontalAlignmentMode = .left
         highScoreLabel.fontColor = Colors.TurqoiseBlue
         highScoreLabel.fontSize = 24
+        highScoreLabel.zPosition = 2
         
         addChild(titleLabel)
-        titleLabel.fontSize = 75
+
+        titleLabel.fontSize = 60
         titleLabel.text = "Cave Escape Larry"
         titleLabel.fontColor = Colors.ShockingPink
         titleLabel.horizontalAlignmentMode = .center
         titleLabel.verticalAlignmentMode = .top
         titleLabel.position.x = size.width / 2
-        titleLabel.position.y = size.height / 2 + size.height * 0.3
+        titleLabel.position.y = size.height / 2 + size.height * 0.2
+        titleLabel.zPosition = 2
         
         addChild(startGameLabel)
         startGameLabel.fontSize = 40
@@ -70,6 +76,7 @@ class GameMenu: SKScene{
         startGameLabel.verticalAlignmentMode = .top
         startGameLabel.position.x = size.width / 2
         startGameLabel.position.y = size.height / 2 - size.height * 0.1
+        startGameLabel.zPosition = 2
         
         addChild(musicLabel)
         musicLabel.fontSize = 25
@@ -77,6 +84,7 @@ class GameMenu: SKScene{
         musicLabel.verticalAlignmentMode = .top
         musicLabel.position.x = size.width / 2
         musicLabel.position.y = size.height / 2 - size.height * 0.30
+        musicLabel.zPosition = 2
         if isMusicOn == true{
             musicLabel.text = "music: On"
             musicLabel.fontColor = Colors.CreameBlue
@@ -85,6 +93,42 @@ class GameMenu: SKScene{
             musicLabel.text = "music: Off"
             musicLabel.fontColor = UIColor.red
         }
+    }
+    
+    
+    
+    override func didMove(to view: SKView) {
+        animateLarry()
+    }
+    
+    override func update(_ currentTime: TimeInterval) {
+        if larry.position.x >= size.width {
+            larry.removeAllActions()
+            larry.removeFromParent()
+            animateLarry()
+        }
+    }
+    
+    func animateLarry() {
+        var yActionArray: [SKAction] = []
+        addChild(larry)
+        larry.zPosition = 1
+        larry.position.x = -(size.width / 2)
+        
+        larry.position.y = size.height / 2 - (size.height * 0.07)
+        let xAnimation: SKAction = SKAction.move(by: CGVector(dx: size.width * 2, dy: 0), duration: 6)
+        let yAnimation: SKAction = SKAction.move(by: CGVector(dx: 0, dy: 20), duration: 0.2)
+        yAnimation.timingMode = .easeIn
+        let yreversed = yAnimation.reversed()
+        yreversed.timingMode = .easeOut
+        for _ in 0..<12 {
+            yActionArray.append(yAnimation)
+            yActionArray.append(yreversed)
+        }
+
+        let sequence = SKAction.sequence(yActionArray)
+        larry.run(xAnimation)
+        larry.run(sequence)
     }
     
     func setHighScore() {
@@ -98,10 +142,6 @@ class GameMenu: SKScene{
         return UserDefaults.standard.object(forKey: key) != nil
     }
 
-    
-    override func didMove(to view: SKView) {
-
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
