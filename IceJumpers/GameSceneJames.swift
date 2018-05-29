@@ -13,7 +13,7 @@ import SpriteKit
 extension GameScene {
     
     func setupJames() {
-
+        
     }
     
     func updateJames() {
@@ -36,24 +36,29 @@ extension GameScene {
         }
     }
     
-   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-     for touch in touches  {
-          let location = touch.location(in: self)
-        if menuLabel.contains(location) {
-            
-            let gameScene = GameMenu(size: self.size)
-            gameScene.scaleMode = self.scaleMode
-            let animation = SKTransition.doorway(withDuration: 2)
-            self.view?.presentScene(gameScene, transition: animation)
-            
-           gameSceneCleanUp()
-            
-            
-            
-        } else {
-          touchStartLocation = location
-       }
-    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches  {
+            let location = touch.location(in: self)
+            if menuLabel.contains(location) {
+                
+                if let highScore = UserDefaults.standard.object(forKey: "highScore") as? Int {
+                    if score > highScore {
+                        UserDefaults.standard.set(score, forKey: "highScore")
+                        print("highScore saved")
+                    }
+                }
+                
+                let gameScene = GameMenu(size: self.size)
+                gameScene.scaleMode = self.scaleMode
+                let animation = SKTransition.doorway(withDuration: 2)
+                self.view?.presentScene(gameScene, transition: animation)
+                
+                gameSceneCleanUp()
+                
+            } else {
+                touchStartLocation = location
+            }
+        }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -197,7 +202,7 @@ extension GameScene {
                 hitIcicle = true
                 loseGame()
             }
-        //if collision is with winPad
+            //if collision is with winPad
         }else if collision == PhysicsCatagory.Player | PhysicsCatagory.WinPad {
             score += 1
             scoreLabel.text = "Score: \(score)"
@@ -210,11 +215,11 @@ extension GameScene {
                     if name == "gravity" {
                         activateGravityPU()
                         powerUp.removeFromParent()
-                    //if invincible
+                        //if invincible
                     } else if name == "invincible" {
                         activateInvinciblePU()
                         powerUp.removeFromParent()
-                    //if third powerup
+                        //if third powerup
                     } else {
                         print("no name")
                     }
@@ -237,7 +242,7 @@ extension GameScene {
         scoreLabel.text = "Score: \(score)"
         youDiedLabel.text = "YOU DIED"
         if isMusicOn == true {
-        GameSounds.shared.playDeathSound()
+            GameSounds.shared.playDeathSound()
             isMusicOn = false
         }
         
@@ -245,7 +250,7 @@ extension GameScene {
             GameSounds.shared.playDeathSound()
             hitIcicle = false
             isMusicOn = false
-    }
+        }
         let looseTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(changeGameStatus), userInfo: nil, repeats: false)
         importantTimers.append(looseTimer)
         UserDefaults.standard.set(false, forKey: "isNewUser")
@@ -273,7 +278,7 @@ extension GameScene {
         if isMusicOn == true && invincible == true {
             GameSounds.shared.playPowerUpSoundOne()
         }
-            print("PHYSICS CATAGORY CHANGED")
+        print("PHYSICS CATAGORY CHANGED")
     }
     
     @objc func stopInvincibility() {
