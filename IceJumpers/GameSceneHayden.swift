@@ -31,29 +31,29 @@ extension GameScene {
             
             print("icicles are being created")
             
-            let T1 = Timer.scheduledTimer(timeInterval: TimeInterval(2.4), target: self, selector: #selector(createIcicle1), userInfo: nil, repeats: true)
+            let T1 = Timer.scheduledTimer(timeInterval: TimeInterval(2.7), target: self, selector: #selector(createIcicle1), userInfo: nil, repeats: true)
             
-            let T2 = Timer.scheduledTimer(timeInterval: TimeInterval(3.4), target: self, selector: #selector(createIcicle2), userInfo: nil, repeats: true)
+            let T2 = Timer.scheduledTimer(timeInterval: TimeInterval(3.7), target: self, selector: #selector(createIcicle2), userInfo: nil, repeats: true)
             
-            let T3 = Timer.scheduledTimer(timeInterval: TimeInterval(2.3), target: self, selector: #selector(createIcicle3), userInfo: nil, repeats: true)
+            let T3 = Timer.scheduledTimer(timeInterval: TimeInterval(2.6), target: self, selector: #selector(createIcicle3), userInfo: nil, repeats: true)
             
-            let T4 = Timer.scheduledTimer(timeInterval: TimeInterval(2.2), target: self, selector: #selector(createIcicle4), userInfo: nil, repeats: true)
+            let T4 = Timer.scheduledTimer(timeInterval: TimeInterval(2.5), target: self, selector: #selector(createIcicle4), userInfo: nil, repeats: true)
             
             let T5 = Timer.scheduledTimer(timeInterval: TimeInterval(3.2), target: self, selector: #selector(createIcicle5), userInfo: nil, repeats: true)
             
-            let T6 = Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(createIcicle6), userInfo: nil, repeats: true)
+            let T6 = Timer.scheduledTimer(timeInterval: TimeInterval(2.1), target: self, selector: #selector(createIcicle6), userInfo: nil, repeats: true)
             
-            let T7 = Timer.scheduledTimer(timeInterval: TimeInterval(2.4), target: self, selector: #selector(createIcicle7), userInfo: nil, repeats: true)
+            let T7 = Timer.scheduledTimer(timeInterval: TimeInterval(2.7), target: self, selector: #selector(createIcicle7), userInfo: nil, repeats: true)
             
-            let T8 = Timer.scheduledTimer(timeInterval: TimeInterval(2.3), target: self, selector: #selector(createIcicle8), userInfo: nil, repeats: true)
+            let T8 = Timer.scheduledTimer(timeInterval: TimeInterval(2.6), target: self, selector: #selector(createIcicle8), userInfo: nil, repeats: true)
             
-            let T9 = Timer.scheduledTimer(timeInterval: TimeInterval(2.5), target: self, selector: #selector(createIcicle9), userInfo: nil, repeats: true)
+            let T9 = Timer.scheduledTimer(timeInterval: TimeInterval(3.1), target: self, selector: #selector(createIcicle9), userInfo: nil, repeats: true)
             
-            let T10 = Timer.scheduledTimer(timeInterval: TimeInterval(2.4), target: self, selector: #selector(createIcicle10), userInfo: nil, repeats: true)
+            let T10 = Timer.scheduledTimer(timeInterval: TimeInterval(2.7), target: self, selector: #selector(createIcicle10), userInfo: nil, repeats: true)
             
-            let T11 = Timer.scheduledTimer(timeInterval: TimeInterval(2.8), target: self, selector: #selector(createIcicle11), userInfo: nil, repeats: true)
+            let T11 = Timer.scheduledTimer(timeInterval: TimeInterval(3.2), target: self, selector: #selector(createIcicle11), userInfo: nil, repeats: true)
             
-            let T12 = Timer.scheduledTimer(timeInterval: TimeInterval(3.1), target: self, selector: #selector(createIcicle12), userInfo: nil, repeats: true)
+            let T12 = Timer.scheduledTimer(timeInterval: TimeInterval(2.1), target: self, selector: #selector(createIcicle12), userInfo: nil, repeats: true)
             
             timerArray.append(T1)
             timerArray.append(T2)

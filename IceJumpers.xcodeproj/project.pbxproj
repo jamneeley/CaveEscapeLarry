@@ -38,6 +38,9 @@
 		9DB2387620B710870091885A /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2387520B710870091885A /* PowerUp.swift */; };
 		9DB2388F20BC90280091885A /* CaveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2388E20BC90280091885A /* CaveBackground.png */; };
 		9DB2389120BC9F830091885A /* tapGesture.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389020BC9F830091885A /* tapGesture.png */; };
+		9DB2389320BDAAEF0091885A /* leadingEdge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389220BDAAEE0091885A /* leadingEdge.png */; };
+		9DB2389520BDAAF60091885A /* trailingEdge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389420BDAAF50091885A /* trailingEdge.png */; };
+		9DB2389720BDB4CF0091885A /* IcicleTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389620BDB4CF0091885A /* IcicleTexture.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +78,9 @@
 		9DB2387720B735600091885A /* Icicle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icicle.png; sourceTree = "<group>"; };
 		9DB2388E20BC90280091885A /* CaveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CaveBackground.png; sourceTree = "<group>"; };
 		9DB2389020BC9F830091885A /* tapGesture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tapGesture.png; sourceTree = "<group>"; };
+		9DB2389220BDAAEE0091885A /* leadingEdge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leadingEdge.png; sourceTree = "<group>"; };
+		9DB2389420BDAAF50091885A /* trailingEdge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trailingEdge.png; sourceTree = "<group>"; };
+		9DB2389620BDB4CF0091885A /* IcicleTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IcicleTexture.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +174,9 @@
 		9DB2386B20B63DF60091885A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DB2389620BDB4CF0091885A /* IcicleTexture.png */,
+				9DB2389420BDAAF50091885A /* trailingEdge.png */,
+				9DB2389220BDAAEE0091885A /* leadingEdge.png */,
 				9DB2389020BC9F830091885A /* tapGesture.png */,
 				9DB2388E20BC90280091885A /* CaveBackground.png */,
 				9DB2387720B735600091885A /* Icicle.png */,
@@ -247,13 +256,16 @@
 				7D23003F20B74C1500744A12 /* DeathSound.mp3 in Resources */,
 				9DB2383A20B638640091885A /* Assets.xcassets in Resources */,
 				9DB2388F20BC90280091885A /* CaveBackground.png in Resources */,
+				9DB2389520BDAAF60091885A /* trailingEdge.png in Resources */,
 				7D23003D20B7430600744A12 /* InGameSounds.mp3 in Resources */,
 				9DB2383D20B638640091885A /* LaunchScreen.storyboard in Resources */,
+				9DB2389320BDAAEF0091885A /* leadingEdge.png in Resources */,
 				7D23003B20B742FD00744A12 /* Menu.mp3 in Resources */,
 				9DB2389120BC9F830091885A /* tapGesture.png in Resources */,
 				7DF54FD520B868EF000A3ED4 /* powerUpOne.wav in Resources */,
 				7DF54FD920B868FD000A3ED4 /* powerUpThree.wav in Resources */,
 				9DB2386D20B653C60091885A /* LLPIXEL3.ttf in Resources */,
+				9DB2389720BDB4CF0091885A /* IcicleTexture.png in Resources */,
 				9DB2383120B638630091885A /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

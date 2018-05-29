@@ -11,7 +11,7 @@ import SpriteKit
 class Icicle: SKSpriteNode{
     
     init(name: String, position: CGPoint, linearDamp: CGFloat, size: CGSize) {
-        super.init(texture: SKTexture(image: #imageLiteral(resourceName: "IcicleImage")), color: .cyan, size: size)
+        super.init(texture: SKTexture(image: #imageLiteral(resourceName: "IcicleTexture")), color: .cyan, size: size)
         setup()
         self.name = name
         self.position = position

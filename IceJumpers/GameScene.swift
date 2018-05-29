@@ -121,11 +121,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = CGVector(dx: 0, dy: -1)
         
         addChild(leadingEdge)
+        leadingEdge.texture = SKTexture(image: #imageLiteral(resourceName: "leadingEdge"))
         leadingEdge.position.x = (leadingEdge.size.width / 2)
         leadingEdge.position.y = (leadingEdge.size.height / 2)
         leadingEdge.zPosition = 1
         
         addChild(trailingEdge)
+        trailingEdge.texture = SKTexture(image: #imageLiteral(resourceName: "trailingEdge"))
         trailingEdge.position.x = (size.width) - (trailingEdge.size.width / 2)
         trailingEdge.position.y = (trailingEdge.size.height / 2)
         trailingEdge.zPosition = 1

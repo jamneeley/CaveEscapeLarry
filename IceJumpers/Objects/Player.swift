@@ -11,7 +11,7 @@ import SpriteKit
 class Player: SKSpriteNode{
     
     init(color: UIColor) {
-        super.init(texture: nil, color: color, size: CGSize(width: 7, height: 7))
+        super.init(texture: nil, color: color, size: CGSize(width: 5, height: 5))
         setup()
     }
     
