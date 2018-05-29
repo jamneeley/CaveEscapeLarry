@@ -230,9 +230,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             print("preference for music is off")
         }
-        
+        if UserDefaults.standard.object(forKey: "isNewUser") as? Bool == false {
         let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(escapeTimer), userInfo: nil, repeats: true)
         importantTimers.append(timerForMessage)
+    }
     }
     @objc func startAnimationTimer() {
         if instructionCount < 3 {
@@ -341,9 +342,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
        if escapeMessage.isHidden == true {
             escapeMessage.isHidden = false
             numberOfmessages += 1
-        } else {
-            escapeMessage.isHidden = true
-        
         }
 
     }
