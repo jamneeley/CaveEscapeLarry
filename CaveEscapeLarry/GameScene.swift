@@ -232,6 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if UserDefaults.standard.object(forKey: "isNewUser") as? Bool == false {
         let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(escapeTimer), userInfo: nil, repeats: true)
         importantTimers.append(timerForMessage)
+            print("text should appear")
     }
 
     }
@@ -351,14 +352,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             timerArray.append(escapeMessageTimer)
         } else {
             escapeMessage.isHidden = true
+            escapeMessage.removeFromParent()
         }
 }
     @objc func showEscapeMessage () {
        if escapeMessage.isHidden == true {
             escapeMessage.isHidden = false
             numberOfmessages += 1
+            print("added a message")
         }
-
     }
 }
 
