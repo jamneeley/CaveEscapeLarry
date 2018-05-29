@@ -11,7 +11,7 @@ import SpriteKit
 class Player: SKSpriteNode{
     
     init(color: UIColor) {
-        super.init(texture: nil, color: color, size: CGSize(width: 7, height: 7))
+        super.init(texture: nil, color: color, size: CGSize(width: 5, height: 5))
         setup()
     }
     
@@ -22,8 +22,8 @@ class Player: SKSpriteNode{
     func setup() {
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody!.categoryBitMask = PhysicsCatagory.Player
-        physicsBody!.collisionBitMask = PhysicsCatagory.Platform
-        physicsBody!.contactTestBitMask = PhysicsCatagory.WinPad | PhysicsCatagory.LoosePad
+        physicsBody!.collisionBitMask = PhysicsCatagory.Platform | PhysicsCatagory.Icicle
+        physicsBody!.contactTestBitMask = PhysicsCatagory.WinPad | PhysicsCatagory.LoosePad | PhysicsCatagory.PowerUp | PhysicsCatagory.Icicle
         physicsBody!.isDynamic = true
     }
 }
