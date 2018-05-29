@@ -51,7 +51,7 @@
 		7DF54FD420B868EF000A3ED4 /* powerUpOne.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerUpOne.wav; sourceTree = "<group>"; };
 		7DF54FD620B868F6000A3ED4 /* powerUpTwo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerUpTwo.wav; sourceTree = "<group>"; };
 		7DF54FD820B868FD000A3ED4 /* powerUpThree.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerUpThree.wav; sourceTree = "<group>"; };
-		9DB2382920B638630091885A /* IceJumpers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceJumpers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9DB2382920B638630091885A /* CaveEscapeLarry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaveEscapeLarry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB2382C20B638630091885A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DB2383020B638630091885A /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		9DB2383420B638630091885A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -59,11 +59,11 @@
 		9DB2383920B638640091885A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9DB2383C20B638640091885A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DB2383E20B638640091885A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9DB2385020B639F20091885A /* GameSceneJames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneJames.swift; path = IceJumpers/GameSceneJames.swift; sourceTree = SOURCE_ROOT; };
-		9DB2385120B639F20091885A /* GameSceneHayden.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneHayden.swift; path = IceJumpers/GameSceneHayden.swift; sourceTree = SOURCE_ROOT; };
-		9DB2385220B639F20091885A /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = IceJumpers/GameScene.swift; sourceTree = SOURCE_ROOT; };
-		9DB2385320B639F20091885A /* PhysicsCatgagory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsCatgagory.swift; path = IceJumpers/Objects/PhysicsCatgagory.swift; sourceTree = SOURCE_ROOT; };
-		9DB2385420B639F20091885A /* GameSceneFrancisco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneFrancisco.swift; path = IceJumpers/GameSceneFrancisco.swift; sourceTree = SOURCE_ROOT; };
+		9DB2385020B639F20091885A /* GameSceneJames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneJames.swift; path = CaveEscapeLarry/GameSceneJames.swift; sourceTree = SOURCE_ROOT; };
+		9DB2385120B639F20091885A /* GameSceneHayden.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneHayden.swift; path = CaveEscapeLarry/GameSceneHayden.swift; sourceTree = SOURCE_ROOT; };
+		9DB2385220B639F20091885A /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = CaveEscapeLarry/GameScene.swift; sourceTree = SOURCE_ROOT; };
+		9DB2385320B639F20091885A /* PhysicsCatgagory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsCatgagory.swift; path = CaveEscapeLarry/Objects/PhysicsCatgagory.swift; sourceTree = SOURCE_ROOT; };
+		9DB2385420B639F20091885A /* GameSceneFrancisco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneFrancisco.swift; path = CaveEscapeLarry/GameSceneFrancisco.swift; sourceTree = SOURCE_ROOT; };
 		9DB2385B20B63A0C0091885A /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		9DB2385F20B63AC10091885A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		9DB2386120B63ACA0091885A /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		9DB2382020B638630091885A = {
 			isa = PBXGroup;
 			children = (
-				9DB2382B20B638630091885A /* IceJumpers */,
+				9DB2382B20B638630091885A /* CaveEscapeLarry */,
 				9DB2382A20B638630091885A /* Products */,
 				9DB2386C20B653C40091885A /* LLPIXEL3.ttf */,
 			);
@@ -106,12 +106,12 @@
 		9DB2382A20B638630091885A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9DB2382920B638630091885A /* IceJumpers.app */,
+				9DB2382920B638630091885A /* CaveEscapeLarry.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9DB2382B20B638630091885A /* IceJumpers */ = {
+		9DB2382B20B638630091885A /* CaveEscapeLarry */ = {
 			isa = PBXGroup;
 			children = (
 				9DB2385B20B63A0C0091885A /* GameMenu.swift */,
@@ -120,7 +120,7 @@
 				9DB2385E20B63AB40091885A /* Objects */,
 				9DB2384420B638710091885A /* Resources */,
 			);
-			path = IceJumpers;
+			path = CaveEscapeLarry;
 			sourceTree = "<group>";
 		};
 		9DB2384420B638710091885A /* Resources */ = {
@@ -196,9 +196,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9DB2382820B638630091885A /* IceJumpers */ = {
+		9DB2382820B638630091885A /* CaveEscapeLarry */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9DB2384120B638640091885A /* Build configuration list for PBXNativeTarget "IceJumpers" */;
+			buildConfigurationList = 9DB2384120B638640091885A /* Build configuration list for PBXNativeTarget "CaveEscapeLarry" */;
 			buildPhases = (
 				9DB2382520B638630091885A /* Sources */,
 				9DB2382620B638630091885A /* Frameworks */,
@@ -208,9 +208,9 @@
 			);
 			dependencies = (
 			);
-			name = IceJumpers;
+			name = CaveEscapeLarry;
 			productName = IceJumpers;
-			productReference = 9DB2382920B638630091885A /* IceJumpers.app */;
+			productReference = 9DB2382920B638630091885A /* CaveEscapeLarry.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -228,7 +228,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9DB2382420B638630091885A /* Build configuration list for PBXProject "IceJumpers" */;
+			buildConfigurationList = 9DB2382420B638630091885A /* Build configuration list for PBXProject "CaveEscapeLarry" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -241,7 +241,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9DB2382820B638630091885A /* IceJumpers */,
+				9DB2382820B638630091885A /* CaveEscapeLarry */,
 			);
 		};
 /* End PBXProject section */
@@ -440,12 +440,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9A24X3MLF7;
-				INFOPLIST_FILE = "$(SRCROOT)/IceJumpers/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CaveEscapeLarry/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.JamesNeeley.IceJumpers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JamesNeeley.CaveEscapeLarry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -458,12 +458,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9A24X3MLF7;
-				INFOPLIST_FILE = "$(SRCROOT)/IceJumpers/Resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/CaveEscapeLarry/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.JamesNeeley.IceJumpers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JamesNeeley.CaveEscapeLarry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -473,7 +473,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9DB2382420B638630091885A /* Build configuration list for PBXProject "IceJumpers" */ = {
+		9DB2382420B638630091885A /* Build configuration list for PBXProject "CaveEscapeLarry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DB2383F20B638640091885A /* Debug */,
@@ -482,7 +482,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9DB2384120B638640091885A /* Build configuration list for PBXNativeTarget "IceJumpers" */ = {
+		9DB2384120B638640091885A /* Build configuration list for PBXNativeTarget "CaveEscapeLarry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DB2384220B638640091885A /* Debug */,
