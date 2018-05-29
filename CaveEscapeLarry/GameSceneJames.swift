@@ -50,9 +50,9 @@ extension GameScene {
                 
                 let gameScene = GameMenu(size: self.size)
                 gameScene.scaleMode = self.scaleMode
-                let animation = SKTransition.doorway(withDuration: 2)
+                let animation = SKTransition.doorsCloseHorizontal(withDuration: 1)
                 self.view?.presentScene(gameScene, transition: animation)
-                
+
                 gameSceneCleanUp()
                 
             } else {
