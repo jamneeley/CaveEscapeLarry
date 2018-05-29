@@ -70,8 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         leadingEdge = Ground(size: size)
         background = SKSpriteNode(imageNamed: "CaveBackground")
         instructionGesture = SKSpriteNode(imageNamed: "tapGesture")
-        
-        
+    
         // leadingEdge = screenSize
         
         trailingEdge = Ground(size: size)
@@ -156,7 +155,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(winPad)
         winPad.position.x = (size.width) - (winPad.size.width / 2)
-        winPad.position.y = (size.height / 2) + (winPad.size.height / 2)
+        winPad.position.y = (size.height / 2) 
         winPad.zPosition = 1
         
         resetPlayer()
@@ -234,9 +233,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(escapeTimer), userInfo: nil, repeats: true)
         importantTimers.append(timerForMessage)
     }
+
     }
+  
     @objc func startAnimationTimer() {
-        if instructionCount < 3 {
+        if instructionCount < 5 {
             let startAnimation = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(animateInstructionGesture), userInfo: nil, repeats: false)
             timerArray.append(startAnimation)
         }
@@ -244,21 +245,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func animateInstructionGesture() {
-        instructionGesture.position.x = size.width / 2 + size.width * 0.05
-        instructionGesture.position.y = size.height / 2
-        instructionGesture.size.width = size.width * 0.15
-        instructionGesture.size.height = size.width * 0.15
-        let endPositionX = size.width / 2
-        let endPositionY = size.height / 2 - size.height * 0.15
-        addChild(instructionGesture)
-        instructionGesture.zPosition = 5
-        let slideDown = SKAction.move(to: CGPoint(x: endPositionX, y: endPositionY), duration: 0.4)
-        instructionGesture.run(slideDown) {
-            self.instructionGesture.removeFromParent()
+        if instructionCount < 3 {
+            instructionGesture.position.x = size.width / 2 + size.width * 0.05
+            instructionGesture.position.y = size.height / 2
+            instructionGesture.size.width = size.width * 0.15
+            instructionGesture.size.height = size.width * 0.15
+            let endPositionX = size.width / 2
+            let endPositionY = size.height / 2 - size.height * 0.15
+            addChild(instructionGesture)
+            instructionGesture.zPosition = 5
+            let slideDown = SKAction.move(to: CGPoint(x: endPositionX, y: endPositionY), duration: 0.4)
+            instructionGesture.run(slideDown) {
+                self.instructionGesture.removeFromParent()
+            }
+        } else if instructionCount < 5 {
+            instructionGesture.position.x = size.width / 2 - size.width * 0.05
+            instructionGesture.position.y = size.height / 2
+            instructionGesture.size.width = size.width * 0.15
+            instructionGesture.size.height = size.width * 0.15
+            let endPositionX = size.width / 2
+            let endPositionY = size.height / 2 - size.height * 0.15
+            addChild(instructionGesture)
+            instructionGesture.zPosition = 5
+            let slideDown = SKAction.move(to: CGPoint(x: endPositionX, y: endPositionY), duration: 0.4)
+            instructionGesture.run(slideDown) {
+                self.instructionGesture.removeFromParent()
+            }
         }
     }
-    
-    
     
     func cameraShake(layers: [SKSpriteNode], duration: CGFloat) {
         let amplitudeX:Float = 10
@@ -310,6 +324,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func gameSceneCleanUp() {
+        backgroundColor = .black
         for child in children {
             child.removeFromParent()
         }
