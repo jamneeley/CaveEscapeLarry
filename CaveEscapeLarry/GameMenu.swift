@@ -58,6 +58,7 @@ class GameMenu: SKScene{
         highScoreLabel.zPosition = 2
         
         addChild(titleLabel)
+
         titleLabel.fontSize = 60
         titleLabel.text = "Cave Escape Larry"
         titleLabel.fontColor = Colors.ShockingPink
