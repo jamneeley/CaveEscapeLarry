@@ -12,50 +12,29 @@ import SpriteKit
 
 extension GameScene {
     
-    func setupJames() {
-        
-    }
-    
-    func updateJames() {
-        isPlayerMoving()
-        updatePlayerPosition()
-    }
-    
-    func updatePlayerPosition() {
-        guard let player = player else {return}
-        playerY = player.position.y
-        playerX = player.position.x
-    }
-    
-    func isPlayerMoving() {
-        guard let player = player else {return}
-        if player.position.x != playerX || player.position.y != playerY {
-            playerMoving = true
-        } else {
-            playerMoving = false
-        }
-    }
+    //MARK - Touches
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches  {
             let location = touch.location(in: self)
             if menuLabel.contains(location) {
-                
+                //set high score if user has highscore and leaves via menu button
                 if let highScore = UserDefaults.standard.object(forKey: "highScore") as? Int {
                     if score > highScore {
                         UserDefaults.standard.set(score, forKey: "highScore")
                         print("highScore saved")
                     }
                 }
-                
+                //transistion to menu
                 let gameScene = GameMenu(size: self.size)
                 gameScene.scaleMode = self.scaleMode
-                let animation = SKTransition.doorway(withDuration: 2)
+                let animation = SKTransition.doorsCloseHorizontal(withDuration: 1)
                 self.view?.presentScene(gameScene, transition: animation)
                 
                 gameSceneCleanUp()
                 
             } else {
+                //make touch start global
                 touchStartLocation = location
             }
         }
@@ -64,20 +43,19 @@ extension GameScene {
         for touch in touches {
             let location = touch.location(in: self)
             let angle = findAngle(StartPoint: touchStartLocation, EndPoint: location)
-            playerJumped(Angle: angle)
+            SwitchAngleToVectorJump(Angle: angle)
         }
     }
     
+    //find angle of finger drag
     func findAngle(StartPoint: CGPoint, EndPoint: CGPoint) -> CGFloat{
-        //        print("Y2: \(EndPoint.y) Y1: \(StartPoint.y),  X2: \(EndPoint.x) X1 \(StartPoint.x)")
         let radians = atan2(StartPoint.y - EndPoint.y, StartPoint.x - EndPoint.x)
         let degree = radians * 180.0 / CGFloat.pi
         return degree
     }
     
-    func playerJumped(Angle angle: CGFloat) {
-        //        print(angle)
-        //        if playerMoving == false {
+    
+    func SwitchAngleToVectorJump(Angle angle: CGFloat) {
         switch angle {
         case 160...180:
             jumpPlayer(dx: -6, dy: 4)
@@ -110,11 +88,10 @@ extension GameScene {
     }
     
     func resetPlayer() {
-        powerUps.removeAll()
         if let player = player {
             player.removeFromParent()
         }
-        let randomColor = UIColor(hue: randomNumber(from: 0, to: 80)/360.0, saturation: 100.0/100.0, brightness: 100.0/100.0, alpha: 1.0)
+        let randomColor = UIColor(hue: randomNumber(from: 40, to: 300)/360.0, saturation: 100.0/100.0, brightness: 100.0/100.0, alpha: 1.0)
         let playerLocal = Player(color: randomColor)
         playerLocal.physicsBody!.mass = 0.12
         playerLocal.position.x = (size.width * 0.03) - (playerLocal.size.width / 2)
@@ -151,13 +128,17 @@ extension GameScene {
         for powerUp in self.powerUps {
             addChild(powerUp)
         }
-        let strobeTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(strobeGravity), userInfo: nil, repeats: true)
+        //powerup color timers
+        let strobeTimer = Timer.scheduledTimer(timeInterval: 0.4, target: self, selector: #selector(strobeGravity), userInfo: nil, repeats: true)
         importantTimers.append(strobeTimer)
         
         let colorTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(strobeInvincibility), userInfo: nil, repeats: true)
         importantTimers.append(colorTimer)
     }
     
+    
+    //MARK: - PowerUp Methods
+    //change powerup colors
     @objc func strobeGravity(){
         if isBlack == false {
             for powerUp in powerUps {
@@ -185,10 +166,32 @@ extension GameScene {
         }
     }
     
-    func randomNumber(from: UInt32, to: UInt32) -> CGFloat{
-        return CGFloat((arc4random() % (to - from)) + from)
+    func activateGravityPU() {
+        isPowerActive = true
+        print("icicles have stopped")
+        if isMusicOn == true && isPowerActive == true {
+            GameSounds.shared.playPowerUpSoundThree()
+        }
+        
+        if isPowerActive == true {
+            stopIcicles()
+        }
     }
     
+    func activateInvinciblePU() {
+        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
+        invincible = true
+        if isMusicOn == true && invincible == true {
+            GameSounds.shared.playPowerUpSoundOne()
+        }
+        print("PHYSICS CATAGORY CHANGED")
+    }
+    
+    @objc func stopInvincibility() {
+        invincible = false
+    }
+    
+    //MARK: - Contact
     
     func didBegin(_ contact: SKPhysicsContact) {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
@@ -259,40 +262,7 @@ extension GameScene {
     @objc func changeGameStatus() {
         isGameOver = true
     }
-    
-    func activateGravityPU() {
-        isPowerActive = true
-        print("icicles have stopped")
-        if isMusicOn == true && isPowerActive == true {
-            GameSounds.shared.playPowerUpSoundThree()
-        }
-        
-        if isPowerActive == true {
-            stopIcicles()
-        }
-    }
-    
-    func activateInvinciblePU() {
-        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
-        invincible = true
-        if isMusicOn == true && invincible == true {
-            GameSounds.shared.playPowerUpSoundOne()
-        }
-        print("PHYSICS CATAGORY CHANGED")
-    }
-    
-    @objc func stopInvincibility() {
-        invincible = false
-    }
 }
-
-
-
-
-
-
-
-
 
 
 

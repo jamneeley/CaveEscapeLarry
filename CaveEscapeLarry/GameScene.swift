@@ -11,8 +11,10 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    
     //MARK: - Properties
+    
+    //Objects
+    
     var leadingEdge: Ground
     var trailingEdge: Ground
     var winPad: WinPad
@@ -23,30 +25,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var background: SKSpriteNode
     var instructionGesture: SKSpriteNode
     
+    //moving objects
+    var player: Player?
     var icicles = [Icicle]()
     
-    var lastUpdateTime: CFTimeInterval = 0
+    //Labels
     let scoreLabel: SKLabelNode
     let youDiedLabel: SKLabelNode
     let menuLabel: SKLabelNode
+    var escapeMessage: SKLabelNode
     
-    var touchStartLocation: CGPoint = CGPoint(x: 0, y: 0)
-    var playerX: CGFloat = 0
-    var playerY: CGFloat = 0
-    var playerMoving = false
-    var playerWon = false
-    var playerLost = false
-    var score = 0
-    
-    //altered at initialization
+    //SIZES - altered at initialization
     var screenSize = CGSize(width: 0, height: 0)
     var ledgeWidth = CGFloat(0)
     var gapWidth = CGFloat(0)
     var icicleWidth = CGFloat(0)
     var icicleHeight = CGFloat(0)
     
-    var player: Player?
+    //misc
     
+    var touchStartLocation: CGPoint = CGPoint(x: 0, y: 0)
+    var playerWon = false
+    var playerLost = false
+    var score = 0
+    var lastUpdateTime: CFTimeInterval = 0
     var powerUps: [PowerUp] = []
     var isPowerActive = false
     var sceneAction = 0
@@ -57,25 +59,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isBlack = false
     var canJump = false
     var instructionCount = 0
-    
+    var numberOfmessages = 0
     var isMusicOn = true
-    var hitIcicle = false 
+    var hitIcicle = false
+    
     
     
     //MARK: - Init
+    
     override init(size: CGSize) {
         //creatobjects
         leadingEdge = Ground(size: size)
         background = SKSpriteNode(imageNamed: "CaveBackground")
         instructionGesture = SKSpriteNode(imageNamed: "tapGesture")
         
-        
-        // leadingEdge = screenSize
-        
         trailingEdge = Ground(size: size)
         winPad = WinPad(size: size)
         losePad = LosePad(size: size)
-        
         let wallSize = CGSize(width: 5, height: size.height)
         let ceilingSize = CGSize(width: size.width, height: 5)
         leadingWall = Wall(size: wallSize)
@@ -85,6 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel = SKLabelNode(fontNamed: "LLPixel")
         youDiedLabel = SKLabelNode(fontNamed: "LLPixel")
         menuLabel = SKLabelNode(fontNamed: "LLPixel")
+        escapeMessage = SKLabelNode(fontNamed:"LLPixel")
         
         super.init(size: size)
         setupSizes(ScreenSize: size)
@@ -110,7 +111,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setup() {
+        backgroundColor = .black
+        let safeAreaInsets = self.view?.safeAreaInsets
+        
+        
         addChild(background)
+        background.position = CGPoint(x: safeAreaInsets?.left ?? size.width / 2, y: safeAreaInsets?.top ?? size.height / 2)
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         background.size.width = size.width
         background.size.height = size.height
@@ -153,7 +159,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(winPad)
         winPad.position.x = (size.width) - (winPad.size.width / 2)
-        winPad.position.y = (size.height / 2) + (winPad.size.height / 2)
+        winPad.position.y = (size.height / 2) 
         winPad.zPosition = 1
         
         resetPlayer()
@@ -194,9 +200,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         menuLabel.verticalAlignmentMode = .top
         menuLabel.zPosition = 4
         
-        setupJames()
+        addChild(escapeMessage)
+        escapeMessage.text = "Stop Lounging Larry, Escape The Cave!"
+        escapeMessage.fontSize = 20
+        escapeMessage.zPosition = 5
+        escapeMessage.fontColor = Colors.PlumpPurple
+        escapeMessage.position.x = size.width / 2
+        escapeMessage.position.y = size.height * 0.05
+        escapeMessage.isHidden = true
+        
         setupHayden()
-        setupFrancisco()
     }
     
     //MASTER VIEW DID LOAD
@@ -205,12 +218,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nodes: [SKSpriteNode] = [leadingEdge, trailingEdge, player, winPad]
         cameraShake(layers: nodes, duration: 3)
         
+        //onboarding animation
         if UserDefaults.standard.object(forKey: "isNewUser") as? Bool != false {
             let animationStartTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startAnimationTimer), userInfo: nil, repeats: true)
             timerArray.append(animationStartTimer)
+            
         }
-        
-        
         //music
         if UserDefaults.standard.object(forKey: "isMusicOn") as? Bool == true {
             isMusicOn = true
@@ -220,9 +233,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             print("preference for music is off")
         }
+        //timer for larry to escape
+        if UserDefaults.standard.object(forKey: "isNewUser") as? Bool == false {
+            let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(escapeTimer), userInfo: nil, repeats: true)
+            importantTimers.append(timerForMessage)
+            print("text should appear")
+        }
+        
     }
+    
     @objc func startAnimationTimer() {
-        if instructionCount < 3 {
+        if instructionCount < 5 {
             let startAnimation = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(animateInstructionGesture), userInfo: nil, repeats: false)
             timerArray.append(startAnimation)
         }
@@ -230,21 +251,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     @objc func animateInstructionGesture() {
-        instructionGesture.position.x = size.width / 2 + size.width * 0.05
-        instructionGesture.position.y = size.height / 2
-        instructionGesture.size.width = size.width * 0.15
-        instructionGesture.size.height = size.width * 0.15
-        let endPositionX = size.width / 2
-        let endPositionY = size.height / 2 - size.height * 0.15
-        addChild(instructionGesture)
-        instructionGesture.zPosition = 5
-        let slideDown = SKAction.move(to: CGPoint(x: endPositionX, y: endPositionY), duration: 0.4)
-        instructionGesture.run(slideDown) {
-            self.instructionGesture.removeFromParent()
+        if instructionCount < 3 {
+            instructionGesture.position.x = size.width / 2 + size.width * 0.05
+            instructionGesture.position.y = size.height / 2
+            instructionGesture.size.width = size.width * 0.15
+            instructionGesture.size.height = size.width * 0.15
+            let endPositionX = size.width / 2
+            let endPositionY = size.height / 2 - size.height * 0.15
+            addChild(instructionGesture)
+            instructionGesture.zPosition = 5
+            let slideDown = SKAction.move(to: CGPoint(x: endPositionX, y: endPositionY), duration: 0.4)
+            instructionGesture.run(slideDown) {
+                self.instructionGesture.removeFromParent()
+            }
+        } else if instructionCount < 5 {
+            instructionGesture.position.x = size.width / 2 - size.width * 0.05
+            instructionGesture.position.y = size.height / 2
+            instructionGesture.size.width = size.width * 0.15
+            instructionGesture.size.height = size.width * 0.15
+            let endPositionX = size.width / 2
+            let endPositionY = size.height / 2 - size.height * 0.15
+            addChild(instructionGesture)
+            instructionGesture.zPosition = 5
+            let slideDown = SKAction.move(to: CGPoint(x: endPositionX, y: endPositionY), duration: 0.4)
+            instructionGesture.run(slideDown) {
+                self.instructionGesture.removeFromParent()
+            }
         }
     }
-    
-    
     
     func cameraShake(layers: [SKSpriteNode], duration: CGFloat) {
         let amplitudeX:Float = 10
@@ -266,6 +300,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for layer in layers {
             layer.run(actionSeq)
         }
+        //let the player jumper after the animation is complete
         let canJumpTimer = Timer.scheduledTimer(timeInterval: TimeInterval(duration + 1.6), target: self, selector: #selector(setCanJump), userInfo: nil, repeats: false)
         timerArray.append(canJumpTimer)
     }
@@ -290,12 +325,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let animation = SKTransition.fade(withDuration: 1.0)
             self.view?.presentScene(newGameScene, transition: animation)
         }
-        updateJames()
-        updateHayden()
-        updateFrancisco()
     }
     
+    //deallocate
+    
     func gameSceneCleanUp() {
+        backgroundColor = .black
         for child in children {
             child.removeFromParent()
         }
@@ -314,6 +349,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeAllActions()
         self.removeAllChildren()
         self.removeFromParent()
+    }
+    
+    // flash label to user
+    @objc func escapeTimer() {
+        if numberOfmessages < 1 {
+            let escapeMessageTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(showEscapeMessage), userInfo: nil, repeats: false)
+            timerArray.append(escapeMessageTimer)
+        } else {
+            escapeMessage.isHidden = true
+            escapeMessage.removeFromParent()
+        }
+    }
+    
+    @objc func showEscapeMessage () {
+        if escapeMessage.isHidden == true {
+            escapeMessage.isHidden = false
+            numberOfmessages += 1
+            print("added a message")
+        }
+    }
+    
+    func randomNumber(from: UInt32, to: UInt32) -> CGFloat{
+        return CGFloat((arc4random() % (to - from)) + from)
     }
 }
 
