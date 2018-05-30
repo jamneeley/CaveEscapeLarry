@@ -24,7 +24,6 @@
 		9DB2385620B639F20091885A /* GameSceneHayden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2385120B639F20091885A /* GameSceneHayden.swift */; };
 		9DB2385720B639F20091885A /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2385220B639F20091885A /* GameScene.swift */; };
 		9DB2385820B639F20091885A /* PhysicsCatgagory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2385320B639F20091885A /* PhysicsCatgagory.swift */; };
-		9DB2385920B639F20091885A /* GameSceneFrancisco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2385420B639F20091885A /* GameSceneFrancisco.swift */; };
 		9DB2385D20B63A0C0091885A /* GameMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2385B20B63A0C0091885A /* GameMenu.swift */; };
 		9DB2386020B63AC10091885A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2385F20B63AC10091885A /* Player.swift */; };
 		9DB2386220B63ACA0091885A /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB2386120B63ACA0091885A /* Ground.swift */; };
@@ -63,7 +62,6 @@
 		9DB2385120B639F20091885A /* GameSceneHayden.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneHayden.swift; path = CaveEscapeLarry/GameSceneHayden.swift; sourceTree = SOURCE_ROOT; };
 		9DB2385220B639F20091885A /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = CaveEscapeLarry/GameScene.swift; sourceTree = SOURCE_ROOT; };
 		9DB2385320B639F20091885A /* PhysicsCatgagory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhysicsCatgagory.swift; path = CaveEscapeLarry/Objects/PhysicsCatgagory.swift; sourceTree = SOURCE_ROOT; };
-		9DB2385420B639F20091885A /* GameSceneFrancisco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameSceneFrancisco.swift; path = CaveEscapeLarry/GameSceneFrancisco.swift; sourceTree = SOURCE_ROOT; };
 		9DB2385B20B63A0C0091885A /* GameMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMenu.swift; sourceTree = "<group>"; };
 		9DB2385F20B63AC10091885A /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		9DB2386120B63ACA0091885A /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				9DB2385220B639F20091885A /* GameScene.swift */,
 				9DB2385020B639F20091885A /* GameSceneJames.swift */,
 				9DB2385120B639F20091885A /* GameSceneHayden.swift */,
-				9DB2385420B639F20091885A /* GameSceneFrancisco.swift */,
 			);
 			path = GameScene;
 			sourceTree = "<group>";
@@ -285,7 +282,6 @@
 				7D1D738220B733A1001FF9BF /* GameSounds.swift in Sources */,
 				9DB2383520B638630091885A /* GameViewController.swift in Sources */,
 				9DB2387420B664A30091885A /* Wall.swift in Sources */,
-				9DB2385920B639F20091885A /* GameSceneFrancisco.swift in Sources */,
 				9DB2386220B63ACA0091885A /* Ground.swift in Sources */,
 				9DB2387220B65CE10091885A /* View+Extension.swift in Sources */,
 				9DB2386420B63AD20091885A /* Icicle.swift in Sources */,
