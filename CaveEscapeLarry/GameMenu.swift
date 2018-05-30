@@ -21,6 +21,7 @@ class GameMenu: SKScene{
     //MARK: - Init
     
     override init(size: CGSize) {
+        
         larry = SKSpriteNode(color: Colors.TurqoiseBlue, size: CGSize(width: 15, height: 15))
         titleLabel = SKLabelNode(fontNamed: "LLPixel")
         startGameLabel = SKLabelNode(fontNamed: "LLPixel")
@@ -40,7 +41,7 @@ class GameMenu: SKScene{
     }
     
     //MARK: - Methods
-    
+
     func setup() {
 
         setHighScore()
@@ -94,9 +95,7 @@ class GameMenu: SKScene{
             musicLabel.fontColor = UIColor.red
         }
     }
-    
-    
-    
+
     override func didMove(to view: SKView) {
         animateLarry()
     }

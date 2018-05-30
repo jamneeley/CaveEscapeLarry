@@ -12,17 +12,18 @@ import SpriteKit
 
 extension GameScene {
     
+    //setup
     func setupHayden() {
-        //initialized
-        
         startIcicles()
-
+        
         let removeNodesTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(removeNodes), userInfo: nil, repeats: true)
         timerArray.append(removeNodesTimer)
     }
     
-    @objc func startIcicles() {
+    //MARK - Icicles
     
+    @objc func startIcicles() {
+        
         if isPowerActive == false {
             
             for icicle in icicles {
@@ -68,11 +69,6 @@ extension GameScene {
             timerArray.append(T11)
             timerArray.append(T12)
         }
-    }
-    
-    
-    func updateHayden() {
-    
     }
     
     @objc func createIcicle1() {
@@ -149,10 +145,10 @@ extension GameScene {
     
     @objc func stopIcicles() {
         
-         let wtfTimer = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
+        let wtfTimer = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
         importantTimers.append(wtfTimer)
         
-    
+        
         for icicle in icicles {
             icicle.physicsBody?.isDynamic = false
         }
