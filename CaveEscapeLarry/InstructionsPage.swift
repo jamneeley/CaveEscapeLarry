@@ -90,7 +90,7 @@ class InstructionsPage: SKScene {
         larry.position.x = -(size.width / 2)
         
         larry.position.y = size.height / 2 - (size.height * 0.07)
-        let xAnimation: SKAction = SKAction.move(by: CGVector(dx: size.width * 2, dy: 0), duration: 6)
+        let xAnimation: SKAction = SKAction.move(by: CGVector(dx: size.width * 2, dy: 0), duration: 4)
         let yAnimation: SKAction = SKAction.move(by: CGVector(dx: 0, dy: 20), duration: 0.2)
         yAnimation.timingMode = .easeIn
         let yreversed = yAnimation.reversed()
@@ -108,7 +108,7 @@ class InstructionsPage: SKScene {
     override func didMove(to view: SKView) {
         animateLarry()
         
-        let textTimer  = Timer.scheduledTimer(timeInterval: TimeInterval(6), target: self, selector: #selector(showtext), userInfo: nil, repeats: false)
+        let textTimer  = Timer.scheduledTimer(timeInterval: TimeInterval(4), target: self, selector: #selector(showtext), userInfo: nil, repeats: false)
 
     }
     
