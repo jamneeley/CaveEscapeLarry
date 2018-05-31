@@ -10,8 +10,8 @@ import SpriteKit
 
 class Player: SKSpriteNode{
     
-    init(color: UIColor) {
-        super.init(texture: nil, color: color, size: CGSize(width: 5, height: 5))
+    init(color: UIColor, size: CGSize) {
+        super.init(texture: nil, color: color, size: size)
         setup()
     }
     

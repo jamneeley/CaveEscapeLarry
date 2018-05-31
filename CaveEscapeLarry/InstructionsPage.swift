@@ -109,7 +109,7 @@ class InstructionsPage: SKScene {
         animateLarry()
         
         let textTimer  = Timer.scheduledTimer(timeInterval: TimeInterval(6), target: self, selector: #selector(showtext), userInfo: nil, repeats: false)
-            textTimer.invalidate()
+
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -129,6 +129,14 @@ class InstructionsPage: SKScene {
         
         for touch in touches  {
             let location = touch.location(in: self)
+            
+            if nextLabel.contains(location  ) {
+                let instructionsPage = InstructionsPage2(size: self.size)
+                instructionsPage.scaleMode = .aspectFill
+                let animation = SKTransition.crossFade(withDuration: 1)
+                self.view?.presentScene(instructionsPage, transition: animation)
+                
+            }
     
 }
 }
