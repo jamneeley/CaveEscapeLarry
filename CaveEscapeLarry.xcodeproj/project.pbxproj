@@ -42,7 +42,10 @@
 		9DB2389720BDB4CF0091885A /* IcicleTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389620BDB4CF0091885A /* IcicleTexture.png */; };
 		9DD3E4D020C054EF00810265 /* flagpole.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD3E4CF20C054EE00810265 /* flagpole.png */; };
 		F74B428B20C04757008D8A6C /* InstructionsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74B428A20C04757008D8A6C /* InstructionsPage.swift */; };
+
 		F74B429120C06166008D8A6C /* InstructionsPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74B429020C06166008D8A6C /* InstructionsPage2.swift */; };
+
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,7 +87,9 @@
 		9DB2389620BDB4CF0091885A /* IcicleTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IcicleTexture.png; sourceTree = "<group>"; };
 		9DD3E4CF20C054EE00810265 /* flagpole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flagpole.png; sourceTree = "<group>"; };
 		F74B428A20C04757008D8A6C /* InstructionsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsPage.swift; sourceTree = "<group>"; };
+
 		F74B429020C06166008D8A6C /* InstructionsPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsPage2.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,8 +162,7 @@
 				9DB2385020B639F20091885A /* GameSceneJames.swift */,
 				9DB2385120B639F20091885A /* GameSceneHayden.swift */,
 			);
-			name = GameScene;
-			path = "../../../Library/Mobile Documents/com~apple~CloudDocs";
+			path = GameScene;
 			sourceTree = "<group>";
 		};
 		9DB2385E20B63AB40091885A /* Objects */ = {
@@ -448,7 +452,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4X5NURS3PH;
+				DEVELOPMENT_TEAM = 9A24X3MLF7;
 				INFOPLIST_FILE = "$(SRCROOT)/CaveEscapeLarry/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -466,7 +470,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4X5NURS3PH;
+				DEVELOPMENT_TEAM = 9A24X3MLF7;
 				INFOPLIST_FILE = "$(SRCROOT)/CaveEscapeLarry/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
