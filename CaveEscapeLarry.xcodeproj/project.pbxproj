@@ -40,6 +40,7 @@
 		9DB2389320BDAAEF0091885A /* leadingEdge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389220BDAAEE0091885A /* leadingEdge.png */; };
 		9DB2389520BDAAF60091885A /* trailingEdge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389420BDAAF50091885A /* trailingEdge.png */; };
 		9DB2389720BDB4CF0091885A /* IcicleTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389620BDB4CF0091885A /* IcicleTexture.png */; };
+		9DD3E4D020C054EF00810265 /* flagpole.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD3E4CF20C054EE00810265 /* flagpole.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		9DB2389220BDAAEE0091885A /* leadingEdge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leadingEdge.png; sourceTree = "<group>"; };
 		9DB2389420BDAAF50091885A /* trailingEdge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trailingEdge.png; sourceTree = "<group>"; };
 		9DB2389620BDB4CF0091885A /* IcicleTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IcicleTexture.png; sourceTree = "<group>"; };
+		9DD3E4CF20C054EE00810265 /* flagpole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flagpole.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 		9DB2386B20B63DF60091885A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				9DD3E4CF20C054EE00810265 /* flagpole.png */,
 				9DB2389620BDB4CF0091885A /* IcicleTexture.png */,
 				9DB2389420BDAAF50091885A /* trailingEdge.png */,
 				9DB2389220BDAAEE0091885A /* leadingEdge.png */,
@@ -262,6 +265,7 @@
 				7DF54FD520B868EF000A3ED4 /* powerUpOne.wav in Resources */,
 				7DF54FD920B868FD000A3ED4 /* powerUpThree.wav in Resources */,
 				9DB2386D20B653C60091885A /* LLPIXEL3.ttf in Resources */,
+				9DD3E4D020C054EF00810265 /* flagpole.png in Resources */,
 				9DB2389720BDB4CF0091885A /* IcicleTexture.png in Resources */,
 				9DB2383120B638630091885A /* Actions.sks in Resources */,
 			);
