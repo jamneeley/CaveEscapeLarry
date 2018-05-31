@@ -92,7 +92,7 @@ extension GameScene {
             player.removeFromParent()
         }
         let randomColor = UIColor(hue: randomNumber(from: 27, to: 190)/360.0, saturation: 100.0/100.0, brightness: 100.0/100.0, alpha: 1.0)
-        let playerLocal = Player(color: randomColor)
+        let playerLocal = Player(color: randomColor, size: CGSize(width: 5, height: 5))
         playerLocal.physicsBody!.mass = 0.12
         playerLocal.position.x = (size.width * 0.03) - (playerLocal.size.width / 2)
         playerLocal.position.y = (size.height / 2) + (playerLocal.size.height / 2)
