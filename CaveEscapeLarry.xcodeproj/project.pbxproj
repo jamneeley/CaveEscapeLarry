@@ -43,6 +43,7 @@
 		9DD3E4D020C054EF00810265 /* flagpole.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DD3E4CF20C054EE00810265 /* flagpole.png */; };
 		F74B428B20C04757008D8A6C /* InstructionsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74B428A20C04757008D8A6C /* InstructionsPage.swift */; };
 		F74B429120C06166008D8A6C /* InstructionsPage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74B429020C06166008D8A6C /* InstructionsPage2.swift */; };
+		F74B429520C08E20008D8A6C /* InstructionsPage3.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74B429420C08E20008D8A6C /* InstructionsPage3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		9DD3E4CF20C054EE00810265 /* flagpole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flagpole.png; sourceTree = "<group>"; };
 		F74B428A20C04757008D8A6C /* InstructionsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsPage.swift; sourceTree = "<group>"; };
 		F74B429020C06166008D8A6C /* InstructionsPage2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsPage2.swift; sourceTree = "<group>"; };
+		F74B429420C08E20008D8A6C /* InstructionsPage3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsPage3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				9DB2385B20B63A0C0091885A /* GameMenu.swift */,
 				F74B428A20C04757008D8A6C /* InstructionsPage.swift */,
 				F74B429020C06166008D8A6C /* InstructionsPage2.swift */,
+				F74B429420C08E20008D8A6C /* InstructionsPage3.swift */,
 				9DB2382C20B638630091885A /* AppDelegate.swift */,
 				9DB2384F20B6397F0091885A /* GameScene */,
 				9DB2385E20B63AB40091885A /* Objects */,
@@ -304,6 +307,7 @@
 				9DB2385520B639F20091885A /* GameSceneJames.swift in Sources */,
 				9DB2386020B63AC10091885A /* Player.swift in Sources */,
 				9DB2382D20B638630091885A /* AppDelegate.swift in Sources */,
+				F74B429520C08E20008D8A6C /* InstructionsPage3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

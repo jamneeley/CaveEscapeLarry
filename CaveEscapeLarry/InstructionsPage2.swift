@@ -9,11 +9,12 @@
 import Foundation
 import SpriteKit
 
-class InstructionsPage2: SKScene {
+class InstructionsPage2: SKScene, SKPhysicsContactDelegate {
     
     var text1: SKLabelNode
+    var text2: SKLabelNode
+    var nextLabel: SKLabelNode
     var larry: Player?
-    var icicle: Icicle
     var winingLedge: SKSpriteNode
     var flagPole: SKSpriteNode
     
@@ -21,8 +22,11 @@ class InstructionsPage2: SKScene {
     override init(size: CGSize) {
         
         text1 = SKLabelNode(fontNamed: "LLPixel")
+        text2 = SKLabelNode(fontNamed: "LLPixel")
+        nextLabel = SKLabelNode(fontNamed: "LLPixel")
+        
         larry = Player(color: Colors.TurqoiseBlue, size: CGSize(width: 25, height: 25))
-        icicle = Icicle(name: "icicle 1", position: CGPoint(x: size.width / 2, y: size.height + 400), linearDamp: (9), size: CGSize(width: 50, height: 100))
+       
         winingLedge = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "trailingEdge")))
         flagPole = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "flagpole")), size: CGSize(width: size.width * 0.06, height: size.height * 0.1))
         
@@ -42,8 +46,9 @@ class InstructionsPage2: SKScene {
     func setup () {
         backgroundColor = Colors.Jet
         larry?.physicsBody?.affectedByGravity = false
+        physicsWorld.contactDelegate = self
         addChild(text1)
-        text1.text = "Larry needs to get to the flag, WATCH OUT FOR ICICLES"
+        text1.text = "Get Larry to the flag"
         text1.fontSize = 20
         text1.fontColor = Colors.PlumpPurple
         text1.horizontalAlignmentMode = .center
@@ -53,6 +58,30 @@ class InstructionsPage2: SKScene {
         text1.zPosition = 10
         text1.alpha = 99
         
+        addChild(text2)
+        
+        text2.text = "WATCH OUT FOR ICICLES"
+        text2.fontSize = 40
+        text2.fontColor = Colors.PlumpPurple
+        text2.horizontalAlignmentMode = .center
+        text2.verticalAlignmentMode = .top
+        text2.position.x = size.width / 2
+        text2.position.y = size.height / 2
+        text2.zPosition = 10
+        text2.alpha = 99
+        text2.isHidden = true
+        
+        addChild(nextLabel)
+        nextLabel.text = "Next"
+        nextLabel.fontSize = 25
+        nextLabel.fontColor = UIColor.red
+        nextLabel.horizontalAlignmentMode = .center
+        nextLabel.verticalAlignmentMode = .top
+        nextLabel.position.x = size.width - 75
+        nextLabel.position.y = size.height - 10
+        nextLabel.zPosition = 10
+        nextLabel.alpha = 99
+        nextLabel.isHidden = true
         
         addChild(winingLedge)
         winingLedge.position.x = (size.width) - (winingLedge.size.width / 2)
@@ -64,10 +93,13 @@ class InstructionsPage2: SKScene {
         flagPole.position.y = winingLedge.position.y * 2 + flagPole.size.height / 2
         flagPole.zPosition = 2
         
+        let icicle1 = Icicle(name: "icicle 1", position: CGPoint(x: size.width / 2, y: size.height + 400), linearDamp: (9), size: CGSize(width: 50, height: 100))
         
+        icicle1.physicsBody?.isDynamic = true
         
-        addChild(icicle)
 
+        addChild(icicle1)
+    
         
     }
     
@@ -75,7 +107,7 @@ class InstructionsPage2: SKScene {
         guard let larry = larry else {return}
         var yActionArray: [SKAction] = []
         addChild(larry)
-        larry.zPosition = 1
+        larry.zPosition = 3
         larry.position.x = -(size.width / 2)
         
         larry.position.y = size.height / 2 + (size.height * 0.25)
@@ -100,10 +132,13 @@ class InstructionsPage2: SKScene {
     }
     override func update(_ currentTime: TimeInterval) {
         guard let larry = larry else {return}
-        if larry.position.x >= size.width {
+        if larry.position.x >= size.width || larry.position.y > size.height {
             larry.removeAllActions()
             larry.removeFromParent()
-            animateLarry()
+            text2.isHidden = false
+            text1.isHidden = true
+            nextLabel.isHidden = false
+            
         }
     }
     
@@ -112,7 +147,23 @@ class InstructionsPage2: SKScene {
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
         if collision == PhysicsCatagory.Player | PhysicsCatagory.Icicle {
             print("they collided")
+            larry?.color = .red
+            larry?.physicsBody?.affectedByGravity = true
             
+        }
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches  {
+            
+    let location = touch.location(in: self)
+            
+    if nextLabel.contains(location) {
+        
+    let instructionsPage = InstructionsPage3(size: self.size)
+    instructionsPage.scaleMode = .aspectFill
+    let animation = SKTransition.crossFade(withDuration: 1)
+    self.view?.presentScene(instructionsPage, transition: animation)
+            }
         }
     }
 }
