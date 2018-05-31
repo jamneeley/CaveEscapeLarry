@@ -17,13 +17,12 @@ extension GameScene {
         startIcicles()
         
         let removeNodesTimer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(removeNodes), userInfo: nil, repeats: true)
-        timerArray.append(removeNodesTimer)
+        importantTimers.append(removeNodesTimer)
     }
     
     //MARK - Icicles
     
     @objc func startIcicles() {
-        
         if isPowerActive == false {
             
             for icicle in icicles {
@@ -144,20 +143,18 @@ extension GameScene {
     }
     
     @objc func stopIcicles() {
+        isPowerActive = false
+        for timer in timerArray {
+            timer.invalidate()
+        }
+        timerArray.removeAll()
         
-        let wtfTimer = Timer.scheduledTimer(timeInterval: TimeInterval(3), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
-        importantTimers.append(wtfTimer)
-        
+        let startIciclesTimer = Timer.scheduledTimer(timeInterval: TimeInterval(8), target: self, selector: #selector(startIcicles), userInfo: nil, repeats: false)
+        timerArray.append(startIciclesTimer)
         
         for icicle in icicles {
             icicle.physicsBody?.isDynamic = false
         }
-        isPowerActive = false
-        for timer in timerArray {
-            
-            timer.invalidate()
-        }
-        timerArray.removeAll()
     }
     
     @objc func removeNodes() {
