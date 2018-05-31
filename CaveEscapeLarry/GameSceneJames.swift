@@ -88,6 +88,7 @@ extension GameScene {
     }
     
     func resetPlayer() {
+
         if let player = player {
             player.removeFromParent()
         }
@@ -167,7 +168,8 @@ extension GameScene {
     }
     
     func activateGravityPU() {
-        isPowerActive = true
+        isPowerActive = true 
+       
         print("icicles have stopped")
         if isMusicOn == true && isPowerActive == true {
             GameSounds.shared.playPowerUpSoundThree()
@@ -176,19 +178,51 @@ extension GameScene {
         if isPowerActive == true {
             stopIcicles()
         }
+        if canJump == true && canCountDown == true{
+            canCountDown = false
+            powerUpTimer(time: 8)
+        }
     }
     
     func activateInvinciblePU() {
-        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(stopInvincibility), userInfo: nil, repeats: false)
+        
         invincible = true
         if isMusicOn == true && invincible == true {
             GameSounds.shared.playPowerUpSoundOne()
         }
-        print("PHYSICS CATAGORY CHANGED")
+        if canJump == true && canCountDown == true{
+            canCountDown = false
+            powerUpTimer(time: 8)
+        }
     }
     
     @objc func stopInvincibility() {
         invincible = false
+    }
+    
+    func powerUpTimer(time: Int) {
+        addChild(powerUpTimeRemainingLabel)
+        powerUpTimeRemaining = time
+        powerUpTimeRemainingLabel.text = "\(time)"
+        let stopTimer = Timer.scheduledTimer(timeInterval: TimeInterval(time), target: self, selector: #selector(removeCountDown), userInfo: nil, repeats: false)
+        let powerTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(changeTimerLabel), userInfo: nil, repeats: true)
+        countDownTimers.append(powerTimer)
+        countDownTimers.append(stopTimer)
+    }
+    
+    @objc func changeTimerLabel() {
+            powerUpTimeRemaining -= 1
+            powerUpTimeRemainingLabel.text = "\(powerUpTimeRemaining)"
+    }
+    
+    @objc func removeCountDown() {
+        powerUpTimeRemainingLabel.text = ""
+        powerUpTimeRemainingLabel.removeFromParent()
+        for timer in countDownTimers {
+            timer.invalidate()
+        }
+        countDownTimers.removeAll()
     }
     
     //MARK: - Contact
@@ -205,9 +239,11 @@ extension GameScene {
                 hitIcicle = true
                 loseGame()
             }
-            //if collision is with winPad
+//            if collision is with winPad
         }else if collision == PhysicsCatagory.Player | PhysicsCatagory.WinPad {
             score += 1
+            numberOfmessages = 0
+            instructLarryAgain()
             scoreLabel.text = "Score: \(score)"
             resetPlayer()
         } else if collision == PhysicsCatagory.Player | PhysicsCatagory.PowerUp {

@@ -36,6 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let menuLabel: SKLabelNode
     var instructLarryLabel: SKLabelNode
     var larryLabel: SKLabelNode
+    var powerUpTimeRemainingLabel: SKLabelNode
     
     //SIZES - altered at initialization
     var screenSize = CGSize(width: 0, height: 0)
@@ -44,6 +45,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var icicleWidth = CGFloat(0)
     var icicleHeight = CGFloat(0)
     
+    //timers
+    var importantTimers: [AnyObject] = []
+    var timerArray: [AnyObject] = []
+    var messageTimers: [AnyObject] = []
+    var countDownTimers: [AnyObject] = []
     //misc
     
     var touchStartLocation: CGPoint = CGPoint(x: 0, y: 0)
@@ -54,14 +60,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var powerUps: [PowerUp] = []
     var isPowerActive = false
     var sceneAction = 0
-    var importantTimers: [AnyObject] = []
-    var timerArray: [AnyObject] = []
+    var powerUpTimeRemaining = 0
+
     var invincible = false
     var isGameOver = false
     var isBlack = false
     var canJump = false
     var instructionCount = 0
     var numberOfmessages = 0
+    var canCountDown = true
+    
     var isMusicOn = true
     var hitIcicle = false
     
@@ -88,6 +96,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         menuLabel = SKLabelNode(fontNamed: "LLPixel")
         instructLarryLabel = SKLabelNode(fontNamed:"LLPixel")
         larryLabel = SKLabelNode(fontNamed: "LLPixel")
+        powerUpTimeRemainingLabel = SKLabelNode(fontNamed: "LLPixel")
+        
         
         super.init(size: size)
         setupSizes(ScreenSize: size)
@@ -200,6 +210,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         instructLarryLabel.position.x = size.width / 2
         instructLarryLabel.position.y = size.height * 0.05
         
+        powerUpTimeRemainingLabel.zPosition = 5
+        powerUpTimeRemainingLabel.fontColor = Colors.PlumpPurple
+        powerUpTimeRemainingLabel.position.x = size.width / 2
+        powerUpTimeRemainingLabel.position.y = size.height * 0.85
+        powerUpTimeRemainingLabel.horizontalAlignmentMode = .center
+        powerUpTimeRemainingLabel.verticalAlignmentMode = .top
+        
         addChild(menuLabel)
         menuLabel.text = "Menu"
         menuLabel.fontSize = 24
@@ -245,7 +262,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //timer for larry to escape
         if UserDefaults.standard.object(forKey: "isNewUser") as? Bool == false {
             let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(instructLarry), userInfo: nil, repeats: true)
-            timerArray.append(timerForMessage)
+            messageTimers.append(timerForMessage)
             print("text should appear")
         }
     }
@@ -365,6 +382,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.removeFromParent()
     }
     
+    func instructLarryAgain() {
+        let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(instructLarry), userInfo: nil, repeats: true)
+        messageTimers.append(timerForMessage)
+    }
+    
     // flash label to user
     @objc func instructLarry() {
         if numberOfmessages < 1 {
@@ -412,8 +434,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if numberOfmessages < 2 {
             numberOfmessages += 1
             instructLarryLabel.removeFromParent()
+            for timer in messageTimers {
+                timer.invalidate()
+            }
         }
     }
+    
+    
     
     func randomNumber(from: UInt32, to: UInt32) -> CGFloat{
         return CGFloat((arc4random() % (to - from)) + from)
