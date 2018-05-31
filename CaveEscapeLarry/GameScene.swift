@@ -68,6 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var canJump = false
     var instructionCount = 0
     var numberOfmessages = 0
+    var canCountDown = true
     
     var isMusicOn = true
     var hitIcicle = false

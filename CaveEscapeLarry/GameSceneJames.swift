@@ -178,7 +178,8 @@ extension GameScene {
         if isPowerActive == true {
             stopIcicles()
         }
-        if canJump == true {
+        if canJump == true && canCountDown == true{
+            canCountDown = false
             powerUpTimer(time: 8)
         }
     }
@@ -190,7 +191,8 @@ extension GameScene {
         if isMusicOn == true && invincible == true {
             GameSounds.shared.playPowerUpSoundOne()
         }
-        if canJump == true {
+        if canJump == true && canCountDown == true{
+            canCountDown = false
             powerUpTimer(time: 8)
         }
     }
