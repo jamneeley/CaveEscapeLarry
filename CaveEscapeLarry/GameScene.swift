@@ -24,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ceiling: Wall
     var background: SKSpriteNode
     var instructionGesture: SKSpriteNode
+    var flagPole: SKSpriteNode
     
     //moving objects
     var player: Player?
@@ -33,7 +34,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let scoreLabel: SKLabelNode
     let youDiedLabel: SKLabelNode
     let menuLabel: SKLabelNode
-    var escapeMessage: SKLabelNode
+    var instructLarryLabel: SKLabelNode
+    var larryLabel: SKLabelNode
     
     //SIZES - altered at initialization
     var screenSize = CGSize(width: 0, height: 0)
@@ -63,12 +65,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isMusicOn = true
     var hitIcicle = false
     
-    
-    
     //MARK: - Init
     
     override init(size: CGSize) {
         //creatobjects
+        flagPole = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "flagpole")), size: CGSize(width: size.width * 0.025, height: size.height * 0.1))
         leadingEdge = Ground(size: size)
         background = SKSpriteNode(imageNamed: "CaveBackground")
         instructionGesture = SKSpriteNode(imageNamed: "tapGesture")
@@ -85,7 +86,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel = SKLabelNode(fontNamed: "LLPixel")
         youDiedLabel = SKLabelNode(fontNamed: "LLPixel")
         menuLabel = SKLabelNode(fontNamed: "LLPixel")
-        escapeMessage = SKLabelNode(fontNamed:"LLPixel")
+        instructLarryLabel = SKLabelNode(fontNamed:"LLPixel")
+        larryLabel = SKLabelNode(fontNamed: "LLPixel")
         
         super.init(size: size)
         setupSizes(ScreenSize: size)
@@ -114,7 +116,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundColor = .black
         let safeAreaInsets = self.view?.safeAreaInsets
         
-        
         addChild(background)
         background.position = CGPoint(x: safeAreaInsets?.left ?? size.width / 2, y: safeAreaInsets?.top ?? size.height / 2)
         background.position = CGPoint(x: size.width / 2, y: size.height / 2)
@@ -122,7 +123,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.size.height = size.height
         background.zPosition =  0
         
-        backgroundColor = Colors.Jet
         physicsWorld.contactDelegate = self
         physicsWorld.gravity = CGVector(dx: 0, dy: -1)
         
@@ -137,6 +137,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         trailingEdge.position.x = (size.width) - (trailingEdge.size.width / 2)
         trailingEdge.position.y = (trailingEdge.size.height / 2)
         trailingEdge.zPosition = 1
+        
+        addChild(flagPole)
+        flagPole.position.x = size.width - flagPole.size.width / 2
+        flagPole.position.y = (size.height * 0.5) + (flagPole.size.height / 2)
+        flagPole.zPosition = 2
         
         addChild(leadingWall)
         leadingWall.position.x = -(leadingWall.size.width / 2)
@@ -189,6 +194,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         youDiedLabel.verticalAlignmentMode = .center
         youDiedLabel.zPosition = 4
         
+        instructLarryLabel.fontSize = 20
+        instructLarryLabel.zPosition = 5
+        instructLarryLabel.fontColor = Colors.PlumpPurple
+        instructLarryLabel.position.x = size.width / 2
+        instructLarryLabel.position.y = size.height * 0.05
+        
         addChild(menuLabel)
         menuLabel.text = "Menu"
         menuLabel.fontSize = 24
@@ -200,22 +211,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         menuLabel.verticalAlignmentMode = .top
         menuLabel.zPosition = 4
         
-        addChild(escapeMessage)
-        escapeMessage.text = "Stop Lounging Larry, Escape The Cave!"
-        escapeMessage.fontSize = 20
-        escapeMessage.zPosition = 5
-        escapeMessage.fontColor = Colors.PlumpPurple
-        escapeMessage.position.x = size.width / 2
-        escapeMessage.position.y = size.height * 0.05
-        escapeMessage.isHidden = true
-        
         setupHayden()
     }
     
     //MASTER VIEW DID LOAD
     override func didMove(to view: SKView) {
         guard let player = player else {return}
-        let nodes: [SKSpriteNode] = [leadingEdge, trailingEdge, player, winPad]
+        let nodes: [SKSpriteNode] = [leadingEdge, trailingEdge, player, winPad, flagPole]
         cameraShake(layers: nodes, duration: 3)
         
         //onboarding animation
@@ -223,6 +225,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let animationStartTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startAnimationTimer), userInfo: nil, repeats: true)
             timerArray.append(animationStartTimer)
             
+            addChild(larryLabel)
+            larryLabel.text = "Larry"
+            larryLabel.fontSize = 15
+            larryLabel.zPosition = 5
+            larryLabel.fontColor = .white
+            larryLabel.position.x = player.position.x + 5
+            larryLabel.position.y = player.position.y + 15
         }
         //music
         if UserDefaults.standard.object(forKey: "isMusicOn") as? Bool == true {
@@ -235,11 +244,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         //timer for larry to escape
         if UserDefaults.standard.object(forKey: "isNewUser") as? Bool == false {
-            let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(escapeTimer), userInfo: nil, repeats: true)
-            importantTimers.append(timerForMessage)
+            let timerForMessage = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(instructLarry), userInfo: nil, repeats: true)
+            timerArray.append(timerForMessage)
             print("text should appear")
         }
-        
     }
     
     @objc func startAnimationTimer() {
@@ -313,6 +321,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MASTER UPDATE PER FRAME
     override func update(_ currentTime: TimeInterval) {
         
+        if UserDefaults.standard.object(forKey: "isNewUser") as? Bool != false {
+            guard let position = player?.position else {return}
+            larryLabel.position.x = position.x + 5
+            larryLabel.position.y = position.y + 15
+        }
+        
         if isGameOver == true {
             print("Game Over!")
             // This is all for the cleanup of the scene so it can deinit
@@ -352,21 +366,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     // flash label to user
-    @objc func escapeTimer() {
+    @objc func instructLarry() {
         if numberOfmessages < 1 {
-            let escapeMessageTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(showEscapeMessage), userInfo: nil, repeats: false)
-            timerArray.append(escapeMessageTimer)
-        } else {
-            escapeMessage.isHidden = true
-            escapeMessage.removeFromParent()
-        }
-    }
-    
-    @objc func showEscapeMessage () {
-        if escapeMessage.isHidden == true {
-            escapeMessage.isHidden = false
             numberOfmessages += 1
-            print("added a message")
+            addChild(instructLarryLabel)
+            switch score {
+            case 0:
+                instructLarryLabel.text = "Larry, escape the cave by getting to the flag!"
+            case 1:
+                instructLarryLabel.text = "What? how'd you get back there Larry?"
+            case 2:
+                instructLarryLabel.text = "Larry! quit doing that!"
+            case 3:
+                instructLarryLabel.text = "Get out of the cave!!!"
+            case 4:
+                instructLarryLabel.text = "You're going to die if you stay larry!"
+            case 5:
+                instructLarryLabel.text = "Do you like doing this larry?"
+            case 6:
+                instructLarryLabel.text = "Im actually kind of impressed!"
+            case 7:
+                instructLarryLabel.text = "Where did you get those hops Larry?"
+            case 8:
+                instructLarryLabel.text = "DAAAMMNN larry!"
+            case 9:
+                instructLarryLabel.text = "that was fire!"
+            case 10:
+                instructLarryLabel.text = "You're a wizard Larry!"
+            case 11:
+                instructLarryLabel.text = "I have no words!"
+            case 12:
+                instructLarryLabel.text = "Seriously, what the hell?"
+            case 13:
+                instructLarryLabel.text = "....."
+            case 14:
+                instructLarryLabel.text = "I CANT LOOK AWAY!"
+            case 15:
+                instructLarryLabel.text = "I JUST SHIT MY PANTS!"
+            case 16:
+                instructLarryLabel.text = "I gotta go clean up!"
+            default:
+                instructLarryLabel.text = ""
+            }
+            
+        } else if numberOfmessages < 2 {
+            numberOfmessages += 1
+            instructLarryLabel.removeFromParent()
         }
     }
     
