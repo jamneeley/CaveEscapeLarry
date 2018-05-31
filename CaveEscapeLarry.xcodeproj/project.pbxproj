@@ -40,6 +40,7 @@
 		9DB2389320BDAAEF0091885A /* leadingEdge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389220BDAAEE0091885A /* leadingEdge.png */; };
 		9DB2389520BDAAF60091885A /* trailingEdge.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389420BDAAF50091885A /* trailingEdge.png */; };
 		9DB2389720BDB4CF0091885A /* IcicleTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DB2389620BDB4CF0091885A /* IcicleTexture.png */; };
+		F74B428B20C04757008D8A6C /* InstructionsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74B428A20C04757008D8A6C /* InstructionsPage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		9DB2389220BDAAEE0091885A /* leadingEdge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leadingEdge.png; sourceTree = "<group>"; };
 		9DB2389420BDAAF50091885A /* trailingEdge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trailingEdge.png; sourceTree = "<group>"; };
 		9DB2389620BDB4CF0091885A /* IcicleTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IcicleTexture.png; sourceTree = "<group>"; };
+		F74B428A20C04757008D8A6C /* InstructionsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsPage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				9DB2385B20B63A0C0091885A /* GameMenu.swift */,
+				F74B428A20C04757008D8A6C /* InstructionsPage.swift */,
 				9DB2382C20B638630091885A /* AppDelegate.swift */,
 				9DB2384F20B6397F0091885A /* GameScene */,
 				9DB2385E20B63AB40091885A /* Objects */,
@@ -149,7 +152,8 @@
 				9DB2385020B639F20091885A /* GameSceneJames.swift */,
 				9DB2385120B639F20091885A /* GameSceneHayden.swift */,
 			);
-			path = GameScene;
+			name = GameScene;
+			path = "../../../Library/Mobile Documents/com~apple~CloudDocs";
 			sourceTree = "<group>";
 		};
 		9DB2385E20B63AB40091885A /* Objects */ = {
@@ -283,6 +287,7 @@
 				9DB2383520B638630091885A /* GameViewController.swift in Sources */,
 				9DB2387420B664A30091885A /* Wall.swift in Sources */,
 				9DB2386220B63ACA0091885A /* Ground.swift in Sources */,
+				F74B428B20C04757008D8A6C /* InstructionsPage.swift in Sources */,
 				9DB2387220B65CE10091885A /* View+Extension.swift in Sources */,
 				9DB2386420B63AD20091885A /* Icicle.swift in Sources */,
 				9DB2385620B639F20091885A /* GameSceneHayden.swift in Sources */,
@@ -435,7 +440,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9A24X3MLF7;
+				DEVELOPMENT_TEAM = 4X5NURS3PH;
 				INFOPLIST_FILE = "$(SRCROOT)/CaveEscapeLarry/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -453,7 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9A24X3MLF7;
+				DEVELOPMENT_TEAM = 4X5NURS3PH;
 				INFOPLIST_FILE = "$(SRCROOT)/CaveEscapeLarry/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -18,6 +18,7 @@ class GameMenu: SKScene{
     var musicLabel: SKLabelNode
     var isMusicOn = true
     var larry: SKSpriteNode
+    var instructionsLabel: SKLabelNode
     //MARK: - Init
     
     override init(size: CGSize) {
@@ -27,6 +28,7 @@ class GameMenu: SKScene{
         startGameLabel = SKLabelNode(fontNamed: "LLPixel")
         musicLabel = SKLabelNode(fontNamed: "LLPixel")
         highScoreLabel = SKLabelNode(fontNamed: "LLPixel")
+        instructionsLabel = SKLabelNode(fontNamed: "LLPixel")
         super.init(size: size)
         preferenceForMusic()
         setup()
@@ -83,9 +85,20 @@ class GameMenu: SKScene{
         musicLabel.fontSize = 25
         musicLabel.horizontalAlignmentMode = .center
         musicLabel.verticalAlignmentMode = .top
-        musicLabel.position.x = size.width / 2
-        musicLabel.position.y = size.height / 2 - size.height * 0.30
+        musicLabel.position.x = size.width - 75
+        musicLabel.position.y = size.height - 10
         musicLabel.zPosition = 2
+        
+        addChild(instructionsLabel)
+        instructionsLabel.fontSize = 25
+        instructionsLabel.text = "How To Play"
+        instructionsLabel.fontColor = Colors.CreameBlue
+        instructionsLabel.horizontalAlignmentMode = .center
+        instructionsLabel.verticalAlignmentMode = .top
+        instructionsLabel.position.x = size.width / 2
+        instructionsLabel.position.y = size.height / 2 - size.height * 0.30
+        instructionsLabel.zPosition = 2
+        
         if isMusicOn == true{
             musicLabel.text = "music: On"
             musicLabel.fontColor = Colors.CreameBlue
@@ -150,7 +163,7 @@ class GameMenu: SKScene{
                 startGameLabel.fontColor = Colors.TurqoiseBlue
                 
                 let gameScene = GameScene(size: self.size)
-                gameScene.scaleMode = self.scaleMode
+                gameScene.scaleMode = .aspectFit
                 let animation = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
                 self.view?.presentScene(gameScene, transition: animation)
                 
@@ -170,6 +183,12 @@ class GameMenu: SKScene{
                     GameSounds.shared.playMenuSound()
                 }
                 
+            }
+            if instructionsLabel.contains(location) {
+                let instructionsPage = InstructionsPage(size: self.size)
+                instructionsPage.scaleMode = .aspectFill
+                let animation = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
+                self.view?.presentScene(instructionsPage, transition: animation)
             }
         }
     }
