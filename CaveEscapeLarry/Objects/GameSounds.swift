@@ -60,6 +60,20 @@ class GameSounds {
         }
     }
     
+    func playDeathSoundInstructionPage() {
+        guard let url = Bundle.main.url(forResource: "DeathSound", withExtension: "mp3") else { return }
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            audioPlayer = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+            DispatchQueue.main.async {
+                self.audioPlayer.play()
+            }
+            
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
     func playPowerUpSoundOne() {
         guard let url = Bundle.main.url(forResource: "powerUpOne", withExtension: "wav") else { return }
         do {

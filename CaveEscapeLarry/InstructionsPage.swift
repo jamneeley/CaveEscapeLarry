@@ -39,7 +39,7 @@ class InstructionsPage: SKScene {
     }
     
     deinit {
-        print("instructionPage Deallocated")
+        print("MaininstructionPage Deallocated")
     }
     
     func setup () {

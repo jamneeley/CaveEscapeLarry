@@ -17,7 +17,8 @@ class InstructionsPage2: SKScene, SKPhysicsContactDelegate {
     var larry: Player?
     var winingLedge: SKSpriteNode
     var flagPole: SKSpriteNode
-    
+    var numberOfCollisions = 0
+    let sound1 = SKAction.playSoundFileNamed("DeathSound", waitForCompletion: false)
     
     override init(size: CGSize) {
         
@@ -127,6 +128,8 @@ class InstructionsPage2: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         animateLarry()
+        
+        
     }
     override func update(_ currentTime: TimeInterval) {
         guard let larry = larry else {return}
@@ -138,16 +141,22 @@ class InstructionsPage2: SKScene, SKPhysicsContactDelegate {
             nextLabel.isHidden = false
             
         }
+        if numberOfCollisions == 1 {
+            run(sound1)
+            numberOfCollisions += 1
+        }
     }
     
     
     func didBegin(_ contact: SKPhysicsContact) {
+    
         let collision = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
-        if collision == PhysicsCatagory.Player | PhysicsCatagory.Icicle {
+        
+        if collision == PhysicsCatagory.Player | PhysicsCatagory.Icicle && numberOfCollisions == 0{
             print("they collided")
             larry?.color = .red
             larry?.physicsBody?.affectedByGravity = true
-            
+            numberOfCollisions += 1
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -157,10 +166,19 @@ class InstructionsPage2: SKScene, SKPhysicsContactDelegate {
             
     if nextLabel.contains(location) {
         
-    let instructionsPage = InstructionsPage3(size: self.size)
-    instructionsPage.scaleMode = .aspectFill
-    let animation = SKTransition.crossFade(withDuration: 1)
-    self.view?.presentScene(instructionsPage, transition: animation)
+        if let skview = self.view {
+            let leftInset = skview.safeAreaInsets.left
+            let rightInset = skview.safeAreaInsets.right
+            let topInset = skview.safeAreaInsets.top
+            let bottomInset = skview.safeAreaInsets.bottom
+            let width = skview.frame.width - (leftInset + rightInset)
+            let height = skview.frame.height - (topInset + bottomInset)
+            let safeView = CGSize(width: width, height: height)
+            let instructionsPage = InstructionsPage3(size: safeView)
+            instructionsPage.scaleMode = .aspectFit
+            let animation = SKTransition.crossFade(withDuration: 1)
+            self.view?.presentScene(instructionsPage, transition: animation)
+        }
             }
         }
     }
