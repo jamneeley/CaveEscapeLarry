@@ -99,8 +99,6 @@ class InstructionsPage2: SKScene, SKPhysicsContactDelegate {
         
 
         addChild(icicle1)
-    
-        
     }
     
     func animateLarry() {
@@ -132,7 +130,7 @@ class InstructionsPage2: SKScene, SKPhysicsContactDelegate {
     }
     override func update(_ currentTime: TimeInterval) {
         guard let larry = larry else {return}
-        if larry.position.x >= size.width || larry.position.y > size.height {
+        if larry.position.x >= size.width * 0.63 || larry.position.y > size.height {
             larry.removeAllActions()
             larry.removeFromParent()
             text2.isHidden = false
