@@ -351,7 +351,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.removeAllActions()
             self.removeAllChildren()
             self.removeFromParent()
-            let newGameScene = GameScene(size: (view?.frame.size)!)
+            let newGameScene = GameScene(size: size)
             newGameScene.scaleMode = self.scaleMode
             let animation = SKTransition.fade(withDuration: 1.0)
             self.view?.presentScene(newGameScene, transition: animation)
