@@ -162,10 +162,19 @@ class GameMenu: SKScene{
             if startGameLabel.contains(location) {
                 startGameLabel.fontColor = Colors.TurqoiseBlue
                 
-                let gameScene = GameScene(size: self.size)
-                gameScene.scaleMode = .aspectFit
-                let animation = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
-                self.view?.presentScene(gameScene, transition: animation)
+                if let skview = self.view {
+                    let leftInset = skview.safeAreaInsets.left
+                    let rightInset = skview.safeAreaInsets.right
+                    let topInset = skview.safeAreaInsets.top
+                    let bottomInset = skview.safeAreaInsets.bottom
+                    let width = skview.frame.width - (leftInset + rightInset)
+                    let height = skview.frame.height - (topInset + bottomInset)
+                    let safeView = CGSize(width: width, height: height)
+                    let instructionsPage = GameScene(size: safeView)
+                    instructionsPage.scaleMode = .aspectFit
+                    let animation = SKTransition.crossFade(withDuration: 1)
+                    self.view?.presentScene(instructionsPage, transition: animation)
+                }
                 
             }
             if musicLabel.contains(location){
@@ -185,10 +194,19 @@ class GameMenu: SKScene{
                 
             }
             if instructionsLabel.contains(location) {
-                let instructionsPage = InstructionsPage(size: self.size)
-                instructionsPage.scaleMode = .aspectFill
-                let animation = SKTransition.doorsCloseHorizontal(withDuration: 1.0)
-                self.view?.presentScene(instructionsPage, transition: animation)
+                if let skview = self.view {
+                    let leftInset = skview.safeAreaInsets.left
+                    let rightInset = skview.safeAreaInsets.right
+                    let topInset = skview.safeAreaInsets.top
+                    let bottomInset = skview.safeAreaInsets.bottom
+                    let width = skview.frame.width - (leftInset + rightInset)
+                    let height = skview.frame.height - (topInset + bottomInset)
+                    let safeView = CGSize(width: width, height: height)
+                    let instructionsPage = InstructionsPage(size: safeView)
+                    instructionsPage.scaleMode = .aspectFit
+                    let animation = SKTransition.crossFade(withDuration: 1)
+                    self.view?.presentScene(instructionsPage, transition: animation)
+                }
             }
         }
     }
