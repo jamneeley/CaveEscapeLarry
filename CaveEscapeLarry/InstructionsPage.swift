@@ -136,12 +136,19 @@ class InstructionsPage: SKScene {
                     timer.invalidate()
                 }
                 timerArray.removeAll()
-                
-                let instructionsPage = InstructionsPage2(size: self.size)
-                instructionsPage.scaleMode = .aspectFill
-                let animation = SKTransition.crossFade(withDuration: 1)
-                self.view?.presentScene(instructionsPage, transition: animation)
-                
+                if let skview = self.view {
+                    let leftInset = skview.safeAreaInsets.left
+                    let rightInset = skview.safeAreaInsets.right
+                    let topInset = skview.safeAreaInsets.top
+                    let bottomInset = skview.safeAreaInsets.bottom
+                    let width = skview.frame.width - (leftInset + rightInset)
+                    let height = skview.frame.height - (topInset + bottomInset)
+                    let safeView = CGSize(width: width, height: height)
+                    let instructionsPage = InstructionsPage2(size: safeView)
+                    instructionsPage.scaleMode = .aspectFit
+                    let animation = SKTransition.crossFade(withDuration: 1)
+                    self.view?.presentScene(instructionsPage, transition: animation)
+                }
             }
         }
     }
