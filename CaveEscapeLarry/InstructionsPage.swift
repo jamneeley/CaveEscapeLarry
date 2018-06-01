@@ -17,10 +17,11 @@ class InstructionsPage: SKScene {
     var text3: SKLabelNode
     var nextLabel: SKLabelNode
     var larry: SKSpriteNode
+    var timerArray: [AnyObject] = []
     
     
     
-      override init(size: CGSize) {
+    override init(size: CGSize) {
         
         text1 = SKLabelNode(fontNamed: "LLPixel")
         text2 = SKLabelNode(fontNamed: "LLPixel")
@@ -87,7 +88,7 @@ class InstructionsPage: SKScene {
         var yActionArray: [SKAction] = []
         addChild(larry)
         larry.zPosition = 1
-        larry.position.x = -(size.width / 2)
+        larry.position.x = -(size.width * 0.1)
         
         larry.position.y = size.height / 2 - (size.height * 0.07)
         let xAnimation: SKAction = SKAction.move(by: CGVector(dx: size.width * 2, dy: 0), duration: 4)
@@ -108,8 +109,8 @@ class InstructionsPage: SKScene {
     override func didMove(to view: SKView) {
         animateLarry()
         
-        let textTimer  = Timer.scheduledTimer(timeInterval: TimeInterval(4), target: self, selector: #selector(showtext), userInfo: nil, repeats: false)
-
+        let textTimer  = Timer.scheduledTimer(timeInterval: TimeInterval(2.5), target: self, selector: #selector(showtext), userInfo: nil, repeats: false)
+        timerArray.append(textTimer)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -119,7 +120,7 @@ class InstructionsPage: SKScene {
             animateLarry()
         }
     }
- 
+    
     @objc func showtext() {
         text2.isHidden = false
         nextLabel.isHidden = false
@@ -131,13 +132,17 @@ class InstructionsPage: SKScene {
             let location = touch.location(in: self)
             
             if nextLabel.contains(location  ) {
+                for timer in timerArray {
+                    timer.invalidate()
+                }
+                timerArray.removeAll()
+                
                 let instructionsPage = InstructionsPage2(size: self.size)
                 instructionsPage.scaleMode = .aspectFill
                 let animation = SKTransition.crossFade(withDuration: 1)
                 self.view?.presentScene(instructionsPage, transition: animation)
                 
             }
-    
-}
-}
+        }
+    }
 }
