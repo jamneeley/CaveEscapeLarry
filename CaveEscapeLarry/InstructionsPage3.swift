@@ -141,9 +141,19 @@ class InstructionsPage3: SKScene {
             touchStartLocation = location
             
             if nextLabel.contains(location) {
-                let scene = GameMenu(size: size)
-                scene.scaleMode = .aspectFill
-                self.view?.presentScene(scene)
+                if let skview = self.view {
+                    let leftInset = skview.safeAreaInsets.left
+                    let rightInset = skview.safeAreaInsets.right
+                    let topInset = skview.safeAreaInsets.top
+                    let bottomInset = skview.safeAreaInsets.bottom
+                    let width = skview.frame.width - (leftInset + rightInset)
+                    let height = skview.frame.height - (topInset + bottomInset)
+                    let safeView = CGSize(width: width, height: height)
+                    let instructionsPage = GameMenu(size: safeView)
+                    instructionsPage.scaleMode = .aspectFit
+                    let animation = SKTransition.crossFade(withDuration: 1)
+                    self.view?.presentScene(instructionsPage, transition: animation)
+                }
             }
         }
     }
